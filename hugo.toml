@@ -1,0 +1,36 @@
+theme = 'paper'
+title = "Car Store"
+languageCode = "pt"
+DefaultContentLanguage = "pt"
+paginate = 3
+enableEmoji = true
+
+disqusShortname = 'professor-enoqueleal-github-io'
+
+[params]
+  # color style
+  color = 'linen'                           # linen, wheat, gray, light
+
+  # header social icons
+  twitter = 'enoquefsleal'                  # twitter.com/enoquefsleal
+  github = 'professor-enoqueleal'           # github.com/fessor-enoqueleal
+  instagram = 'professorenoqueleal'         # instagram.com/professorenoqueleal
+  youtube = '@professorenoqueleal'
+
+  # home page profile
+  avatar = 'https://avatars.githubusercontent.com/u/127161266?v=4'
+  name = 'Enoque Leal'
+  bio = 'Ninguém é tão grande que não possa aprender, nem tão pequeno que não possa ensinar.'
+
+[menu]
+
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 10
+  [[menu.main]]
+    identifier = "contact"
+    name = "YouTube"
+    url = "http://youtube.com/@professorenoqueleal"
+    weight = 10
