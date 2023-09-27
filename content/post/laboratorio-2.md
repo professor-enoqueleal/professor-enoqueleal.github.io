@@ -1,8 +1,8 @@
 +++
 title = "LAB 2 - Criando o método para INSERT e configurando a conexão com o com o banco de dados"
 description = "Este laboratório apresenta os conceitos básicos para criar uma aplicação Java Web contendo uma camada de persitêcia de dados!"
-date = 2023-04-17
-draft = true
+date = 2023-09-27
+draft = false
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
