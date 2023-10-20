@@ -18,7 +18,7 @@ Após concluir este laboratório, você deverá ser capaz de:
 
 ## Esse laboratório também esta disponível em formato de vídeo aula no YouTube
 
-{{< youtube 9hetsRBUwycdq5MU >}}
+{{< youtube nZwDype_1p8 >}}
 
 ## Tarefa 1: Criando o método updateCar()
 
