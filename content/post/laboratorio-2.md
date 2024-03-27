@@ -146,10 +146,10 @@ Você adicionou a dependência do H2 DB (Banco de dados em memória).
 
 5 - Após acessar a console do **H2 DB**, faça o login utilizando as informações a seguir:
 
-    * Driver Class: *org.h2.Driver*
-    * JDBC URL: *jdbc:h2:~/test*
-    * User Name: *sa*
-    * Password: *sa*
+    * Driver Class: org.h2.Driver
+    * JDBC URL: jdbc:h2:~/test
+    * User Name: sa
+    * Password: sa
 
 6 - Após efetuar o login, você poderá criar sua primeira tabela. Você deverá criar uma tabela chamada **CAR**. Para isso utilize o comando **SQL** a seguir:
 
@@ -193,7 +193,7 @@ car-store/
 
 2 - Agora com os novos pacotes devidamente criados, vamos criar a nossa classe model chamada Car. Para isso, clique com o botão direito do mouse em cima do pacote model, escolha a opção *New, Java Class*, depois digite *Car* e aperte a tecla ENTER. O assistente de criação do IntelliJ irá criar uma nova classe Java chamada **Car**.
 
-3 - Com a classe Car devidamente criada, vamos criar um atribute para ela do tipo *String* com o modificador de acesso *privado* e com o nome de **name**.
+3 - Com a classe Car devidamente criada, vamos criar um atribute para ela do tipo *String* com o modificador de acesso *privado (private)* e com o nome de **name**.
 
 4 - Crie os métodos acessores (getters and setters) para esse atributo que acabamos de criar *(private String name)*.
 
