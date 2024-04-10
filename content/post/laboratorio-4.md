@@ -1,8 +1,8 @@
 +++
 title = "LAB 4 - Criando o método para DELETE"
 description = "Este laboratório tem como objetivo apresentar uma forma básica sobre como deletar dados em uma tabela no banco de dados!"
-date = 2023-10-11
-draft = true
+date = 2024-04-10
+draft = false
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
