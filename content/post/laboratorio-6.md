@@ -1,8 +1,8 @@
 +++
 title = "LAB 6 - Configurando o pool de conexões"
 description = "Este laboratório tem como objetivo apresentar uma forma básica sobre como configurar um pool de conexões para gerenciar as conexões com o banco de dados!"
-date = 2023-10-24
-draft = true
+date = 2024-04-24
+draft = false
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
