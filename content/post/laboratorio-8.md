@@ -1,6 +1,5 @@
-# Laboratório 8 — Implementando upload de imagem [WIP]
 +++
-title = "Laboratório 7 — Criando a a funcionalidade de login"
+title = "LAB 8 — Criando a a funcionalidade de login"
 description = "Este laboratório visa apresentar uma forma básica sobre como implementar a capacidade de fazer upload de imagens!"
 date = 2024-05-08
 draft = false
@@ -20,7 +19,12 @@ Após concluir este laboratório, você deverá ser capaz de:
 - Alterar a DAO (Data Access Object), inserindo a nova variável para trafegar o caminho da imagem;
 - Alterar o formulário HTML para capturar o arquivo / imagem no momento do cadastro;
 
----
+## Esse laboratório também esta disponível em formato de vídeo aula no YouTube
+
+{{< youtube XwzLNVX5yWE >}}
+{{< youtube pGGYm7UekpA >}}
+{{< youtube 0gx1M4nFmG0 >}}
+
 ## Tarefa 1: Alterando a tabela CAR
 
 Para podermos implementar a funcionalidade de *upload de imagens*, precisamos alterar a estrutura da tabela **CAR** adicionando uma nova coluna que irá armazenar o caminho (path) onde a imagem foi salva.
