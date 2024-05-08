@@ -1,5 +1,5 @@
 +++
-title = "LAB 8 — Criando a a funcionalidade de login"
+title = "LAB 8 - Criando a a funcionalidade de login (WIP)"
 description = "Este laboratório visa apresentar uma forma básica sobre como implementar a capacidade de fazer upload de imagens!"
 date = 2024-05-08
 draft = false
@@ -256,7 +256,6 @@ Com isso a refatoração do método **updateCar()** está pronta.
 
 8 - Salve todas as alterações **(CTRL + S)** e faça uma revisão tudo que foi feito até aqui!
 
----
 
 ## Tarefa 3: Incluindo a biblioteca Apache Commons File Upload
 
@@ -291,7 +290,6 @@ OBS: Nenhum código deve ser removido nesta etapa. Apenas adicione a nova depend
 Após salvar as alterações, o IntelliJ IDEA deve sincronizar automaticamente as alterações do arquivo de configuração e baixar as bibliotecas **commons-fileupload** e **commons-io**.
 
 
----
 
 ## Tarefa 4: Alterando a servlet CreateCarServlet e implementando o método uploadImage()
 
@@ -399,7 +397,6 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws I
 
 5 - Salve todas as alterações **(CTRL + S)** e faça uma revisão de tudo que foi feito até aqui!
 
---
 
 ## Tarefa 5: Alterando a página index.jsp
 
@@ -446,11 +443,9 @@ O código resultante da implementação deverá ser igual ao código a seguir:
 
 3 - Salve todas as alterações **(CTRL + S)** e faça uma revisão tudo que foi feito até aqui!
 
----
 
-## Tarefa 5: Alterando a página dashboard.jsp
+## Tarefa 5: Alterando a página dashboard.jsp (WIP)
 
----
 
 Parabéns! :+1:
 
