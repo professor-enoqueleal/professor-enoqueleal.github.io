@@ -2,7 +2,7 @@
 title = "LAB 8 - Criando a a funcionalidade de login (WIP)"
 description = "Este laboratório visa apresentar uma forma básica sobre como implementar a capacidade de fazer upload de imagens!"
 date = 2024-05-08
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
