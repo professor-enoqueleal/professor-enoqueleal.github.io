@@ -2,7 +2,7 @@
 title = "LAB 3 - Criando o método para SELECT"
 description = "Este laboratório apresenta as ações básicas criar uma camada de consulta na camada de persitêcia de dados!"
 date = 2024-10-04
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
