@@ -13,9 +13,9 @@ disqusShortname = 'professor-enoqueleal-github-io'
 
   # header social icons
   twitter = 'enoquefsleal'                  # twitter.com/enoquefsleal
-  github = 'professor-enoqueleal'           # github.com/fessor-enoqueleal
-  instagram = 'professorenoqueleal'         # instagram.com/professorenoqueleal
-  youtube = '@professorenoqueleal'
+  github = 'professor-enoqueleal'           # github.com/professor-enoqueleal
+  instagram = 'enoque.dev'                  # instagram.com/enoque.dev
+  youtube = '@enoque-dev'                   # youtube.com/@enoque-dev
 
   # home page profile
   avatar = 'https://avatars.githubusercontent.com/u/127161266?v=4'
@@ -32,5 +32,5 @@ disqusShortname = 'professor-enoqueleal-github-io'
   [[menu.main]]
     identifier = "contact"
     name = "YouTube"
-    url = "http://youtube.com/@professorenoqueleal"
+    url = "http://youtube.com/@enoque-dev"
     weight = 10
