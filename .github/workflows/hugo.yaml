@@ -78,3 +78,5 @@ jobs:
         uses: actions/deploy-pages@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Display GitHub Pages URL
+        run: echo "GitHub Pages URL: ${{ steps.deployment.outputs.page_url }}"
