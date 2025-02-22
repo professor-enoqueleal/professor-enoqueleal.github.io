@@ -2,7 +2,6 @@ theme = 'paper'
 title = "Car Store"
 languageCode = "pt"
 DefaultContentLanguage = "pt"
-paginate = 3
 enableEmoji = true
 
 disqusShortname = 'professor-enoqueleal-github-io'
@@ -34,3 +33,6 @@ disqusShortname = 'professor-enoqueleal-github-io'
     name = "YouTube"
     url = "http://youtube.com/@enoque-dev"
     weight = 10
+
+[pagination]
+  pagerSize = 4
