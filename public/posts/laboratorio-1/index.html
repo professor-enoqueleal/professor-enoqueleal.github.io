@@ -1,0 +1,617 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="pt"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>LAB 1 - Criando a aplicação - Car Store</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Visão geral e objetivos do laboratório
+Este laboratório apresenta os conceitos básicos para criar uma aplicação Web utilizando Java.
+Após concluir este laboratório, você deverá ser capaz de:
+
+Criar uma aplicação Web com Java
+Subir um servidor Tomcat (Servlet Container) Embed para executar sua aplicação Java
+Fazer requisições http através de um formulário HTML e capturar os dados dessa requisição em uma Servlet
+
+Esse laboratório também esta disponível em formato de vídeo aula no YouTube
+
+      
+    
+
+Tarefa 1: Criar uma aplicação Java utilizando o IntelliJ
+1 - Garanta que você possui o IntelliJ instalado no seu computador. Caso não tenha faça a instalação da versão Community Edition, conforme demonstrado nesse vídeo do youtube: Instalando o IntelliJ no Windows. Ou clique no link a seguir, para fazer o download link para download do intellij" />
+  <meta name="author" content="Enoque Leal" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="//localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="//localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/127161266?v=4" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="//localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="//localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="//localhost:1313/instagram.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="//localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="//localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="//localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.144.2">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="//localhost:1313/"
+      >Car Store</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="http://youtube.com/@enoque-dev"
+        >YouTube</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/enoquefsleal"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/professor-enoqueleal"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./instagram.svg)"
+        href="https://instagram.com/enoque.dev"
+        target="_blank"
+        rel="me"
+      >
+        instagram
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">LAB 1 - Criando a aplicação</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>21 de fev. de 2025</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>Enoque Leal</span>
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="visão-geral-e-objetivos-do-laboratório">Visão geral e objetivos do laboratório</h2>
+<p>Este laboratório apresenta os conceitos básicos para criar uma aplicação Web utilizando Java.</p>
+<p>Após concluir este laboratório, você deverá ser capaz de:</p>
+<ul>
+<li>Criar uma aplicação Web com Java</li>
+<li>Subir um servidor Tomcat (Servlet Container) Embed para executar sua aplicação Java</li>
+<li>Fazer requisições http através de um formulário HTML e capturar os dados dessa requisição em uma Servlet</li>
+</ul>
+<h2 id="esse-laboratório-também-esta-disponível-em-formato-de-vídeo-aula-no-youtube">Esse laboratório também esta disponível em formato de vídeo aula no YouTube</h2>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/BtDiMAbq53E?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<h2 id="tarefa-1-criar-uma-aplicação-java-utilizando-o-intellij">Tarefa 1: Criar uma aplicação Java utilizando o IntelliJ</h2>
+<p>1 - Garanta que você possui o IntelliJ instalado no seu computador. Caso não tenha faça a instalação da versão <em>Community Edition</em>, conforme demonstrado nesse vídeo do youtube: <a href="https://youtu.be/RBxAySum8UU">Instalando o IntelliJ no Windows</a>. Ou clique no link a seguir, para fazer o <em>download</em> <a href="https://www.jetbrains.com/idea/download/download-thanks.html?platform=macM1&amp;code=IIC">link para download do intellij</a></p>
+<p><img src="/gifs/01-instalando-intellij.gif" alt="gif animado demonstrando como installar o intellij no windows"></p>
+<p>2 - Abra o IntelliJ</p>
+<p>OBS: Caso seja a primeira vez que esteja abrindo o IntelliJ na sua máquina, você precisa clicar no <em>checkbox</em> para confirmar que leu os termos de uso da ferramenta e depois clicar no botão <em>continue</em>.</p>
+<p>Na tela seguinte, você precisa escolher se deseja compartilhar o uso dos seus dados de forma anônima. Clique em <em>Don&rsquo;t Send</em>.</p>
+<p>Caso não seja a primeira vez que você esteja usando o IntelliJ nesse computador, desconsidere essa informação.</p>
+<p>3 - Depois que o IntelliJ estiver aberto, na tela de boas vindas (welcome), clique no menu <em>Projects</em> e depois clique no botão <em>New Project</em>.</p>
+<p>4 - Na tela do assistente de novos projetos, clique em <strong>Maven Archetype</strong>, nesta seção, configure:</p>
+<ul>
+<li><strong>Name</strong>: carstore</li>
+<li><strong>Location</strong>: Mantenha o valor padrão</li>
+<li><strong>JDK</strong>: Escolha a JDK instalada no menu suspenso
+OBS: Caso não tenha nenhuma JDK Instalada, clique em <em>Download JDK</em> e no menu suspenso, selecione a versão 11 no campo version e depois clique no botão <em>Download</em>.</li>
+<li><strong>Catalog</strong>: Mantenha o valor padrão</li>
+<li><strong>Archetype</strong>: maven-archetype-webapp</li>
+</ul>
+<p>Na seção <strong>Advanced Settings</strong>, configure:</p>
+<ul>
+<li><strong>GroupId</strong>: br.com.carstore</li>
+<li><strong>ArtifactId</strong>: carstore</li>
+<li><strong>Version</strong>: 1.0-SNAPSHOT</li>
+</ul>
+<p>5 - Clique no botão <em>Create</em></p>
+<p><img src="/gifs/02-criando-o-projeto.gif" alt="gif animado demonstrando como criar um novo projeto usando um archetype maven para projeto web"></p>
+<p>Depois disso basta aguardar toda a etapa de carregamento ser finalizada. No final sua aplicação estará pronta.</p>
+<p>OBS: O processo de carregamento pode demorar alguns minutos, é imprescindível aguardar toda a etapa de carregamento ser finalizada.</p>
+<p>6 - Faça uma revisão tudo que foi feito até aqui!</p>
+<hr>
+<h2 id="tarefa-2-adicionar-o-tomcat-plugin-e-o-maven-war-plugin">Tarefa 2: Adicionar o Tomcat plugin e o Maven War Plugin</h2>
+<p>Agora que temos a aplicação devidamente criada, chegou a hora de adicionar o plugin do Tomcat (Servlet Container). Dessa forma será possível executar a aplicação Web no servidor Tomcat sem esforços adicionais.</p>
+<p>1 - Com a aplicação criada, abra o arquivo <em>pom.xml</em></p>
+<p>2 - O arquivo pom.xml é o arquivo utilizando pelo Maven para o processo de construção e empacotamento de uma aplicação Java. Este arquivo é composto por diferentes seções. Encontre a seção <em><!-- raw HTML omitted --></em>. Dentro dessa seção, adicione o bloco de código a seguir.</p>
+<p>OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco <em><!-- raw HTML omitted --></em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;plugins&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.tomcat.maven<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>tomcat7-maven-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>2.1<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;path&gt;</span>/<span style="color:#f92672">&lt;/path&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;executions&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;execution&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;id&gt;</span>tomcat-run<span style="color:#f92672">&lt;/id&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;goals&gt;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&lt;goal&gt;</span>exec-war<span style="color:#f92672">&lt;/goal&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/goals&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phase&gt;</span>package<span style="color:#f92672">&lt;/phase&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;enableNaming&gt;</span>false<span style="color:#f92672">&lt;/enableNaming&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;/execution&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/executions&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/plugins&gt;</span>
+</span></span></code></pre></div><p><img src="/gifs/03-adicioando-o-plugin-do-tomcat.gif" alt="gif animado demonstrando como adicionar o plugin do tomcat"></p>
+<p>3 - Adicione um segundo plugin dentro do bloco <em>plugins</em> que foi criado na etapa anterior, conforme código a seguir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>maven-war-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>3.2.2<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;webXml&gt;</span>src\main\webapp\WEB-INF\web.xml<span style="color:#f92672">&lt;/webXml&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;warSourceDirectory&gt;</span>src/main/webapp<span style="color:#f92672">&lt;/warSourceDirectory&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span></code></pre></div><p><img src="/gifs/04-adicioando-o-plugin-do-maven.gif" alt="gif animado demonstrando como adicionar o plugin do maven-war"></p>
+<p>4 - O código resultante deverá ser igual ao código a seguir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;plugins&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.tomcat.maven<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>tomcat7-maven-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>2.1<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;path&gt;</span>/<span style="color:#f92672">&lt;/path&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;executions&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;execution&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;id&gt;</span>tomcat-run<span style="color:#f92672">&lt;/id&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;goals&gt;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&lt;goal&gt;</span>exec-war<span style="color:#f92672">&lt;/goal&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/goals&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phase&gt;</span>package<span style="color:#f92672">&lt;/phase&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;enableNaming&gt;</span>false<span style="color:#f92672">&lt;/enableNaming&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;/execution&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/executions&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;plugin&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>maven-war-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>3.2.2<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;webXml&gt;</span>src\main\webapp\WEB-INF\web.xml<span style="color:#f92672">&lt;/webXml&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;warSourceDirectory&gt;</span>src/main/webapp<span style="color:#f92672">&lt;/warSourceDirectory&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/plugin&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/plugins&gt;</span>
+</span></span></code></pre></div><p>5 - Salve todas as alterações <strong>(CTRL + S)</strong> e depois clique no botão <em>Load Maven Changes</em>. Com isso, o Maven irá identificar que novos <em>plugins</em> foram adicionados no projeto e irá fazer o download dos mesmos de forma automática. Aguarde o carregamento finalizar.</p>
+<p>6 - Feito isso, já é possível executar a aplicação e renderizar sua primeira página web no browser. Para isso, navegue até o menu Maven dentro do IntelliJ, expanda o projeto <em>carstore</em>, depois clique em <em>plugins</em>, depois clique em <em>tomcat7</em> e por último clique duas vezes na opção <em>tomcat7:run</em>. Fazendo isso o servidor web (Servlet Container) será ligado (start).</p>
+<p>7 - Após o processo de carregamento, abra uma aba no seu browser e digite o endereço a seguir: http://localhost:8080</p>
+<p>8 - Uma página web deverá ser renderizada contendo a mensagem <strong>Hello, world!</strong></p>
+<p><img src="/gifs/05-executando-o-servidor.gif" alt="gif animado demonstrando como executar o projeto que foi criando"></p>
+<p>9 - Faça uma revisão tudo que foi feito até aqui!</p>
+<hr>
+<h2 id="tarefa-3-criando-sua-primeira-servlet-e-fazendo-uma-requisição-http">Tarefa 3: Criando sua primeira Servlet e fazendo uma requisição <em>http</em></h2>
+<p>Agora que você já tem sua aplicação devidamente criada, já conseguiu subir seu servidor web, chegou a hora de criar sua primeira Servlet e fazer sua primeira requisição <strong>http</strong></p>
+<p>1 - Abra novamente o arquivo arquivo <em>pom.xml</em></p>
+<p>2 - Localize o bloco <em><!-- raw HTML omitted --></em>. Você deverá adicionar duas dependências dentro do bloco <em><!-- raw HTML omitted --></em> no <strong>pom.xml</strong> da sua aplicação, conforme o código a seguir.</p>
+<p>OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco <em><!-- raw HTML omitted --></em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>javax.servlet<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>javax.servlet-api<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>3.0.1<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;scope&gt;</span>provided<span style="color:#f92672">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>javax.servlet<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>jstl<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>1.2<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p><img src="/gifs/06-adicionando-dependencias.gif" alt="gif animado demonstrando como adicionar as dependência no pom.xml do projeto"></p>
+<p>3 - Salve todas as alterações <strong>(CTRL + S)</strong> e depois clique no botão <em>Load Maven Changes</em>. Com isso, o Maven irá identificar que duas novas <em>dependências</em> foram adicionadas ao seu projeto e irá fazer o download das mesmas de forma automática para você. Aguarde o carregamento finalizar.</p>
+<p>4 - Depois que o carregamento / download das novas <em>dependências</em> finalizar, volte para a aba <em>Project</em> e navegue no seu projeto clicando na pasta <em>carstore</em>, <em>src</em> e depois em <em>main</em>. Clique com o botão direto em cima da pasta <em>main</em> e escolha a opção <em>New</em> e depois <em>Directory</em>. O assistente de criação de novos diretórios será aberto, selecione a opção <strong>Java</strong>.</p>
+<p>5 - Após o diretório <strong>Java</strong> ter sido criado, vamos criar um pacote (<em>package</em>) para que possamos criar nossa primeira classe <strong>Java</strong>. Para isso clique com o botão direto em cima do diretório Java, escolha a opção <em>New</em> e depois a opção <em>Package</em>, no assistente criação digite: <em>br.com.carstore.servlet</em>. Esse será o pacote padrão da nossa aplicação.</p>
+<p><img src="/gifs/07-criando-diretorio-java-e-package.gif" alt="gif animado demonstrando como criar o diretório java o e package br.com.carstore"></p>
+<p>6 - Agora vamos criar nossa primeira (Servlet) classe Java. Clique com o botão direto em cima do package que acabamos de criar (<em>br.com.carstore.servlet</em>), selecione a opção <em>New</em> e depois a opção <em>Java Class</em>. No assistente de criação, digite o nome da classe: <strong>CreateCarServlet</strong></p>
+<p>7 - Agora com sua primeira <em>servlet</em> devidamente criada, é necessário adicionar a anotação <em>@WebServlet</em>. Essa anotação deverá ficar uma linha acima de onde o nome da classe <strong>CreateCarServlet</strong> está declarado, depois adicione a extensão (extends) para a classe HttpServlet. O código resultante deverá ficar igual ao código a seguir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> br.com.carstore.servlet;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.annotation.WebServlet;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServlet;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@WebServlet</span>(<span style="color:#e6db74">&#34;/create-car&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreateCarServlet</span> <span style="color:#66d9ef">extends</span> HttpServlet {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="/gifs/08-criando-servlet.gif" alt="gif animado demonstrando como criar a classe create car servlet e adicionar a anotação @ web servlet"></p>
+<p>8 - O Próximo passo é sobrescrever (Override) o método doPost(). Este é o método que vai receber as requisições <em>http</em> feitas com o método <em>POST</em> através do formulário <em>HTML</em>.</p>
+<p>Para sobrescrever o método <em>doPost()</em>, basta digitar <em>doPost</em> e depois usar as teclas de atalho (CTRL + barra de espaço) dentro da declaração da sua classe. O auto complete colocará uma sugestão, basta apertar a tecla enter que o método será sobrescrito. O código resultante deverá ficar igual ao código a seguir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> br.com.carstore.servlet;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.ServletException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.annotation.WebServlet;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServlet;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServletRequest;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServletResponse;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@WebServlet</span>(<span style="color:#e6db74">&#34;/create-car&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreateCarServlet</span> <span style="color:#66d9ef">extends</span> HttpServlet {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doPost</span>(HttpServletRequest request, HttpServletResponse response) <span style="color:#66d9ef">throws</span> ServletException, IOException {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">doPost</span>(request, response);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="/gifs/09-override-dopost.gif" alt="gif animado demonstrando como sobrescrever o método doPost"></p>
+<p>9 - Após ter sobrescrito o método doPost, vamos implementar a chamada para o req.getParameter(&ldquo;car-name&rdquo;). É dessa forma que pegamos as informações que serão enviadas através do formulário html.</p>
+<p>Dentro do método doPost(), apague a linha <strong>super.doPost(req, resp)</strong> e na sequência implemente o seguinte código:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>String carName <span style="color:#f92672">=</span> request.<span style="color:#a6e22e">getParameter</span>(<span style="color:#e6db74">&#34;car-name&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(carName);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>request.<span style="color:#a6e22e">getRequestDispatcher</span>(<span style="color:#e6db74">&#34;index.html&#34;</span>).<span style="color:#a6e22e">forward</span>(request, response);
+</span></span></code></pre></div><p>O código completo deverá ficar igual ao código a seguir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> br.com.carstore.servlet;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.ServletException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.annotation.WebServlet;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServlet;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServletRequest;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.servlet.http.HttpServletResponse;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@WebServlet</span>(<span style="color:#e6db74">&#34;/create-car&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CreateCarServlet</span> <span style="color:#66d9ef">extends</span> HttpServlet {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doPost</span>(HttpServletRequest request, HttpServletResponse response) <span style="color:#66d9ef">throws</span> ServletException, IOException {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String carName <span style="color:#f92672">=</span> request.<span style="color:#a6e22e">getParameter</span>(<span style="color:#e6db74">&#34;car-name&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(carName);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        request.<span style="color:#a6e22e">getRequestDispatcher</span>(<span style="color:#e6db74">&#34;index.html&#34;</span>).<span style="color:#a6e22e">forward</span>(request, response);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="/gifs/10-implementando-get-parameter.gif" alt="gif animado demonstrando como implementar a chamada para o método getParameter"></p>
+<p>10 - O último passo será a implementação do formulário HTML. Esse formulário deverá conter três elementos. Um <em>label</em> contendo o nome do campo, um <em>input</em> para que o usuário possa escrever o valor no formato texto e um <em>button</em> para que o usuário possa clicar e submeter (submit) a requisição <em>http</em> para o servidor.</p>
+<p>No seu projeto, navegue até o diretório: car-store-guide/app/src/main/webapp/index.html</p>
+<p>A implementação do formulário deverá ser igual ao código a seguir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">h2</span>&gt;Create Car&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/create-car&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">label</span>&gt;Car Name&lt;/<span style="color:#f92672">label</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;car-name&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;car-name&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Register&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">form</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p>11 - Faça uma revisão tudo que foi feito até aqui!</p>
+<hr>
+<p>Parabéns! &#x1f44d;</p>
+<p>Você criou uma nova aplicação Web utilizando <strong>Java</strong>, <strong>Maven</strong> e um <strong>Archetype</strong> Web. Adicionou o plugin do <em>Tomcat Embed</em> e o Plugin de <em>Build</em> do Maven. Criou sua primeira Servlet e sobrescreveu o método doPost, preparando ele para receber um atributo que você receberá no Java quando o seu formulário html for submetido. Depois você criou um formulário html contento um campo input text para que o usuário possa fazer a requisiçãp. Com isso já é possível subir o servidor e renderizar a nossa primeira página web, fazer a primeira requisição e recuperar o valor enviado na sua Java Servlet.</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="//localhost:1313/tags/java"
+      >java</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="//localhost:1313/tags/html"
+      >html</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="//localhost:1313/tags/web"
+      >web</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="//localhost:1313/tags/servlet"
+      >servlet</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'professor-enoqueleal-github-io';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script>
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2025
+    <a class="link" href="//localhost:1313/">Car Store</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

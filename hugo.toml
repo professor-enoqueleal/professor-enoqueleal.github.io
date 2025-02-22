@@ -1,10 +1,13 @@
-theme = 'paper'
+theme = "hugo-paper"
 title = "Car Store"
 languageCode = "pt"
 DefaultContentLanguage = "pt"
 enableEmoji = true
 
 disqusShortname = 'professor-enoqueleal-github-io'
+
+[pagination]
+  pagerSize = 3
 
 [params]
   # color style
@@ -34,5 +37,6 @@ disqusShortname = 'professor-enoqueleal-github-io'
     url = "http://youtube.com/@enoque-dev"
     weight = 10
 
-[pagination]
-  pagerSize = 4
+
+
+
