@@ -64,7 +64,10 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"      
+            --baseURL "${{ steps.pages.outputs.base_url }}/"    
+
+      - name: List files in public directory
+        run: ls -la public/  
                 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
