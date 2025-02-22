@@ -71,6 +71,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: pages-artifact
+      - name: List downloaded files
+        run: ls -la
       - name: Verify artifact download
         run: echo "Artifact 'pages-artifact' downloaded successfully."
       - name: Deploy to GitHub Pages
