@@ -1,7 +1,7 @@
 +++
 title = "LAB 1 - Criando a aplicação"
 description = "Este laboratório apresenta os conceitos básicos para criar uma aplicação Web utilizando Java."
-date = "2025-08-14"
+date = "2025-08-13"
 draft = false
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
