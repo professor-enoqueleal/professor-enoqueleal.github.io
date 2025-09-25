@@ -2,7 +2,7 @@
 title = "LAB 5 – Melhorando a interface com Bootstrap (WebJars)"
 description = "Este laboratório apresenta o passo a passo para adicionar o Bootstrap ao projeto CarStore com Spring Boot e Thymeleaf, melhorando a interface da aplicação."
 date = "2025-09-25"
-draft = true
+draft = false
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "spring", "thymeleaf", "bootstrap" ]
 +++
