@@ -18,6 +18,8 @@ Após concluir este laboratório, você deverá ser capaz de:
 - Fazer requisições http através de um formulário HTML e capturar os dados dessa requisição em uma Servlet;
 - Gravar os dados que foram capturados de um formulário HTML e persisti-los em um banco de dados (insert).
 
+# LAB 6 - PARTE 1
+
 ## Esse laboratório também esta disponível em formato de vídeo aula no YouTube
 
 ### PARTE 1
@@ -26,7 +28,7 @@ Após concluir este laboratório, você deverá ser capaz de:
 ### PARTE 2
 {{< youtube Du4fwItGElU >}}
 
-# Atividade 1
+## Atividade 1
 
 ## Tarefa 1: Adicionar uma nova dependência ao seu projeto
 
@@ -294,7 +296,7 @@ public class CarDao {
 
 ---
 
-# Atividade 2
+# LAB 6 - PARTE 2
 
 ## Esse laboratório também esta disponível em formato de vídeo aula no YouTube
 
@@ -588,16 +590,10 @@ Feito isso, após a criação de um novo carro, a requisição será redireciona
 11 - Faça uma revisão tudo que foi feito até aqui!
 
 ---
-# Atividade 3
+
+# LAB 6 - PARTE 3
 
 ## Visão geral e objetivos do laboratório
-
-Este laboratório tem como objetivo apresentar uma forma básica sobre como deletar dados em uma tabela no banco de dados!
-
-Após concluir este laboratório, você deverá ser capaz de:
-
-- Fazer requisições http através de um formulário HTML e capturar os dados dessa requisição em uma Servlet;
-- Deletar / remover dados que foram persistidos no banco de dados (delete car where id = ?).
 
 ## Esse laboratório também esta disponível em formato de vídeo aula no YouTube
 
@@ -875,16 +871,9 @@ O código resultante deverá ser igual ao código a seguir:
 
 ---
 
-# Atividade 4
+# LAB 6 - PARTE 4
 
 ## Visão geral e objetivos do laboratório
-
-Este laboratório tem como objetivo apresentar uma forma básica sobre como atualizar dados em uma tabela no banco de dados!
-
-Após concluir este laboratório, você deverá ser capaz de:
-
-- Fazer requisições http através de um formulário HTML e capturar os dados dessa requisição em uma Servlet;
-- Atualizar dados que foram persistidos no banco de dados (update ... where id = ?).
 
 ## Esse laboratório também esta disponível em formato de vídeo aula no YouTube
 
