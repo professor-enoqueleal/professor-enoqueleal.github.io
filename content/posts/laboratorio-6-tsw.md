@@ -17,6 +17,9 @@ Após concluir este laboratório, você deverá ser capaz de:
 - Subir um servidor Tomcat (Servlet Container) e um banco de dados em memória (H2 DB) embed para executar sua aplicação Java e persistir seus dados;
 - Fazer requisições http através de um formulário HTML e capturar os dados dessa requisição em uma Servlet;
 - Gravar os dados que foram capturados de um formulário HTML e persisti-los em um banco de dados (insert).
+- Consultar no banco de dados os dados que foram gravados a partir de um formulário HTML (select).
+- Alterar no banco de dados os dados que foram gravados a partir de um formulário HTML (update).
+- Deletar no banco de dados os dados que foram gravados a partir de um formulário HTML (delete).
 
 # LAB 6 - PARTE 1
 
