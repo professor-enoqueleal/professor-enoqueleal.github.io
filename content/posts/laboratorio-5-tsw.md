@@ -318,7 +318,7 @@ Para referenciar esse novo fragmento que acabou de ser criado, na página `index
 
 ```html
 <!-- Inserindo a navbar -->
-<div th:replace="fragments :: navbar"></div>
+<div th:replace="~{fragments :: navbar}"></div>
 ```
 
 Dessa maneira, conseguimos importar o menu em todas as páginas, sem ficar repetindo código. Isso facilita a manutenção e evita duplicação de código (boilerplate).
