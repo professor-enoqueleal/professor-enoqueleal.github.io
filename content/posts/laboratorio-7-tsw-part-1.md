@@ -267,19 +267,22 @@ Adicione um `CommandLineRunner` (`StartupRunner`) para popular dados automaticam
 @Component
 public class StartupRunner implements CommandLineRunner {
 
-    private final CarDao CarDao;
+    private final CarDao carDao;
 
-    public StartupRunner(CarDao CarDao) { 
+    public StartupRunner(CarDao carDao) { 
 
-        this.CarDao = CarDao; 
+        this.carDao = carDao; 
 
     }
 
     @Override
     public void run(String... args) throws Exception {
-        CarDao.create("Fusca", "Azul");
-        CarDao.create("Civic", "Preto");
-        System.out.println(CarDao.findAll());
+
+        carDao.create("Fusca", "Azul");
+        carDao.create("Civic", "Preto");
+
+        System.out.println(carDao.findAll());
+        
     }
 
 }
