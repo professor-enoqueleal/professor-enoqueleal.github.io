@@ -1,12 +1,11 @@
-
-++
++++
 title = "LAB 8 - Implementando a funcionalidade de Login com Spring Security"
 description = "Passo a passo para adicionar autenticação via formulário na camada web usando Spring Security (starter)."
-date = 2025-10-22
-draft = false
+date = 2025-10-23
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "spring", "security", "login", "h2" ]
-++
++++
 
 ## Objetivo
 
@@ -116,6 +115,7 @@ public class SecurityConfig {
         // Usa BCrypt, que é o padrão seguro para hashear senhas.
         return new BCryptPasswordEncoder();
     }
+
 }
 ```
 
@@ -151,36 +151,61 @@ Crie o template `src/main/resources/templates/login.html`. O formulário deve te
 
 ```html
 <!doctype html>
-<html xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org)">
-  <head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>CarStore</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}" />
-  </head>
-  <body>
-    <h1>Acesso Restrito</h1>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Um cinza claro para o fundo */
+        }
+        .login-container {
+            margin-top: 10vh; /* Margem superior para centralizar verticalmente */
+            max-width: 400px; /* Largura máxima para o card de login */
+        }
+    </style>
+</head>
+<body>
 
-    <form th:action="@{/login}" method="post">
-      <div>
-        <label for="username">Usuário</label>
-        <input type="text" id="username" name="username" required/>
-      </div>
-      <div>
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" required/>
-      </div>
-      <div>
-        <button type="submit">Entrar</button>
-      </div>
-      
-      <div th:if="${param.error}" style="color: red; margin-top: 10px;">
-        Usuário ou senha inválidos.
-      </div>
-      <div th:if="${param.logout}" style="color: green; margin-top: 10px;">
-        Você saiu com sucesso.
-      </div>
-    </form>
-  </body>
+<div class="container login-container">
+    <div class="card shadow-lg">
+
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Login</h3>
+
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuário</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu usuário" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
+                </div>
+
+                <div th:if="${param.error}" class="alert alert-danger text-center" role="alert">
+                    Usuário ou senha inválidos.
+                </div>
+                <div th:if="${param.logout}" class="alert alert-success text-center" role="alert">
+                    Você saiu com sucesso.
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center text-muted">
+            <small>CarStore &copy; 2025</small>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+
+</body>
 </html>
 
 ```
