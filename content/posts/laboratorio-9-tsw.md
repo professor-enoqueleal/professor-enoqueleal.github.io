@@ -1,8 +1,8 @@
 +++
 title = "LAB 9 - Protegendo a Camada API (REST) com Spring Security e JWT"
 description = "Guia passo a passo para configurar a segurança em endpoints REST, utilizando o Spring Security de forma stateless e implementando autenticação baseada em JSON Web Tokens (JWT)."
-date = 2025-10-29
-draft = true
+date = 2025-10-30
+draft = false
 author = "Enoque Leal"
 tags = [ "java", "spring", "security", "api", "rest", "jwt", "stateless" ]
 +++
