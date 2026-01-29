@@ -2,7 +2,7 @@
 title = "LAB 6 - Criando e configurando a conexão com o com o banco de dados"
 description = "Este laboratório apresenta os conceitos básicos sobre como criar e configurar a conexão com bando de dados utilizando JDBC!"
 date = 2025-10-02
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++

@@ -2,7 +2,7 @@
 title = "LAB 4 - Controllers e Views com Thymeleaf no Spring Boot"
 description = "Este laboratório apresenta o passo a passo para criar controllers e páginas dinâmicas com Thymeleaf em uma aplicação Spring Boot."
 date = "2025-09-11"
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "spring", "thymeleaf" ]
 +++

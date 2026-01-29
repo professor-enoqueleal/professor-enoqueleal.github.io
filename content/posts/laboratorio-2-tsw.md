@@ -2,7 +2,7 @@
 title = "LAB 2 - Criando sua Primeira API com Spring Boot"
 description = "Este laboratório apresenta os conceitos básicos para criar uma aplicação Web utilizando Java."
 date = "2025-08-21"
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
