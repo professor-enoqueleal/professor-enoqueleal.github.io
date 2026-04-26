@@ -79,6 +79,9 @@ spring.datasource.password=sa
 
 spring.h2.console.enabled=true
 spring.h2.console.path=/console
+
+spring.sql.init.mode=always
+spring.jpa.hibernate.ddl-auto=none
 ```
 
 Observação, se o seu projeto utiliza a versão 4.X do Spring Boot, também é necessário registrar a servlet para habilitar a console Web do HS:
@@ -129,10 +132,16 @@ Nesta etapa criaremos um classe DAO (Data Access Object) que irá utilizar o `Jd
 3. Na pasta `src/main/resources/`, crie um novo arquivo chamado `schema.sql` e adicione o seguinte conteúdo:
 
 ```sql
+DROP TABLE IF EXISTS CAR;
+
 CREATE TABLE IF NOT EXISTS car (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255),
-  color VARCHAR(255)
+  color VARCHAR(255),
+  brand VARCHAR(255),
+  model VARCHAR(255),
+  year_fabric VARCHAR(255),
+  year_model VARCHAR(255)
 );
 ```
 
@@ -145,7 +154,7 @@ Esse arquivo contém um código SQL para uma operação DDL. Essa operação vai
 ```java
 package br.com.carstore.dao;
 
-import br.com.carstore.model.CarDTO;
+import br.com.carstore.dto.CarDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -168,6 +177,7 @@ public class CarDao {
         @Override
         public CarDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
             CarDTO dto = new CarDTO();
+            dto.setId(rs.getString("id"));
             dto.setName(rs.getString("name"));
             dto.setColor(rs.getString("color"));
             return dto;
@@ -178,7 +188,7 @@ public class CarDao {
     // SELECT * FROM car -> List<CarDTO>
     public List<CarDTO> findAll() {
 
-        String sql = "SELECT name, color FROM car";
+        String sql = "SELECT * FROM car";
 
         return jdbc.query(sql, rowMapper);
 
@@ -211,6 +221,14 @@ public class CarDao {
 
     }
 
+    public CarDTO findById(String id) {
+
+        String sql = "SELECT * FROM CAR WHERE id = ?";
+
+        return jdbc.queryForObject(sql, rowMapper, Long.valueOf(id));
+
+    }
+
 }
 ```
 
@@ -228,10 +246,12 @@ Notas sobre a implementação
 package br.com.carstore.service;
 
 import br.com.carstore.dao.CarDao;
-import br.com.carstore.model.CarDTO;
+import br.com.carstore.dto.CarDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -252,6 +272,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public void save(CarDTO carDTO) {
 
+        if (carDTO.getId() == null) {
+            UUID uuid = UUID.randomUUID();
+            carDTO.setId(uuid.toString());
+        }
+
         carDao.save(carDTO);
 
     }
@@ -267,6 +292,13 @@ public class CarServiceImpl implements CarService {
     public void update(String id, CarDTO carDTO) {
 
         carDao.update(id, carDTO);
+
+    }
+
+    @Override
+    public CarDTO findById(String id) {
+
+        return carDao.findById(id);
 
     }
 
@@ -294,25 +326,41 @@ Exemplo rápido de conexão no H2 console:
 Adicione um `CommandLineRunner` (`StartupRunner`) para popular dados automaticamente e validar `CarDao`.
 
 ```java
+package br.com.carstore.runner;
+
+import br.com.carstore.dao.CarDao;
+import br.com.carstore.dto.CarDTO;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
 @Component
 public class StartupRunner implements CommandLineRunner {
 
     private final CarDao carDao;
 
-    public StartupRunner(CarDao carDao) { 
+    public StartupRunner(CarDao carDao) {
 
-        this.carDao = carDao; 
+        this.carDao = carDao;
 
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        carDao.save("Fusca", "Azul");
-        carDao.save("Civic", "Preto");
+        CarDTO carOne = new CarDTO();
+        carOne.setName("Gol");
+        carOne.setColor("Branco");
+        carOne.setBrand("Volkswagen");
+        carDao.save(carOne);
+
+        CarDTO carTwo= new CarDTO();
+        carTwo.setName("Civic");
+        carTwo.setColor("Civic");
+        carTwo.setBrand("Honda");
+        carDao.save(carTwo);
 
         System.out.println(carDao.findAll());
-        
+
     }
 
 }
