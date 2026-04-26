@@ -50,14 +50,12 @@ Na parte 1 desse laboratório, iremos implementar a comunicação com o banco de
 2. Adicione (se necessário) as dependências abaixo dentro de `<dependencies>` para a Parte 1 (JDBC + H2):
 
 ```xml
-<!-- H2 (runtime para desenvolvimento) -->
 <dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
     <scope>runtime</scope>
 </dependency>
 
-<!-- Spring JDBC (JdbcTemplate) -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -74,13 +72,11 @@ Na parte 1 desse laboratório, iremos implementar a comunicação com o banco de
 2. Adicione as configurações mínimas para o banco de dados H2 DB:
 
 ```
-# DataSource (H2 file-based, recomendado para o laboratório)
 spring.datasource.url=jdbc:h2:~/test;AUTO_SERVER=TRUE
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
 spring.datasource.password=sa
 
-# H2 console
 spring.h2.console.enabled=true
 spring.h2.console.path=/console
 ```
