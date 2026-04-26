@@ -69,7 +69,7 @@ Na parte 1 desse laboratório, iremos implementar a comunicação com o banco de
 
 ### Tarefa 2: Configuração (H2 / DataSource para JDBC)
 
-1. Abra o arquivo `application.proprerties`que fica no diretório ` (ou crie) ``carstore-spring-boot/src/main/resources`.
+1. Abra o arquivo `application.properties`que fica no diretório ` (ou crie) ``carstore-spring-boot/src/main/resources`.
 
 2. Adicione as configurações mínimas para o banco de dados H2 DB:
 
@@ -85,7 +85,41 @@ spring.h2.console.enabled=true
 spring.h2.console.path=/console
 ```
 
-Quando a aplicação for executada, será possível acessar a console de gerenciamento web do H2 DB, a partir do path: `/console`.
+Observação, se o seu projeto utiliza a versão 4.X do Spring Boot, também é necessário registrar a servlet para habilitar a console Web do HS:
+
+```java
+package com.example.demo_4_0_6;
+
+import org.h2.server.web.JakartaWebServlet;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ *
+ * No Spring Boot 4.x a auto-configuração do H2 console (H2ConsoleAutoConfiguration)
+ * foi removida. Este bean substitui o comportamento que existia no Spring Boot 3.x
+ * com a propriedade spring.h2.console.enabled=true.
+ *
+ */
+@Configuration
+public class H2ConsoleConfig {
+
+    @Bean
+    public ServletRegistrationBean<JakartaWebServlet> h2ConsoleServlet() {
+
+        ServletRegistrationBean<JakartaWebServlet> registration = new ServletRegistrationBean<>(new JakartaWebServlet(), "/console/*");
+        registration.setName("H2Console");
+        registration.setLoadOnStartup(1);
+        return registration;
+
+    }
+
+}
+
+```
+
+Quando a aplicação for executada, será possível acessar a console de gerenciamento web do H2 DB, a partir do path: `http://localhost:8080/console`.
 
 
 ### Tarefa 3: Implementando a conexão com JdbcTemplate
@@ -259,7 +293,7 @@ Exemplo rápido de conexão no H2 console:
     - Password: sa
 
 
-### Tarefa 5: Implementar o CommandLineRunner (Opcioanl)
+### Tarefa 5: Implementar o CommandLineRunner (Opcional)
 
 Adicione um `CommandLineRunner` (`StartupRunner`) para popular dados automaticamente e validar `CarDao`.
 
@@ -278,8 +312,8 @@ public class StartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        carDao.create("Fusca", "Azul");
-        carDao.create("Civic", "Preto");
+        carDao.save("Fusca", "Azul");
+        carDao.save("Civic", "Preto");
 
         System.out.println(carDao.findAll());
         
