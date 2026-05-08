@@ -1,7 +1,7 @@
 +++
 title = "LAB 10 - Melhorando a protenção do sistema com ROLEs"
 description = "Substituir UserDetailsService em memória por implementação que busca usuários e roles no banco (JPA) e proteger controllers com anotações de autorização." 
-date = 2025-11-06
+date = 2026-15-09
 draft = true
 author = "Enoque Leal"
 tags = [ "java", "spring", "security", "jpa", "roles", "authorization" ]
