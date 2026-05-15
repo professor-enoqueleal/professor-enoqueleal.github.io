@@ -2,7 +2,7 @@
 title = "LAB 12 - Deploy na AWS com Elastic Beanstalk e RDS"
 description = "Tutorial passo a passo para fazer o deploy da aplicação Spring Boot na AWS usando Elastic Beanstalk via console web, com configuração automática de RDS e suporte a H2DB para desenvolvimento local."
 date = 2026-05-14
-draft = true
+draft = false
 author = "Enoque Leal"
 tags = [ "aws", "elastic-beanstalk", "rds", "spring-boot", "deploy", "cloud" ]
 mermaid = true
