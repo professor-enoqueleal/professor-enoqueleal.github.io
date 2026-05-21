@@ -1,7 +1,5 @@
 theme = "hugo-paper"
-title = "Car Store"
-languageCode = "pt"
-DefaultContentLanguage = "pt"
+defaultContentLanguage = "pt"
 enableEmoji = true
 
 disqusShortname = 'professor-enoqueleal-github-io'
@@ -21,22 +19,47 @@ disqusShortname = 'professor-enoqueleal-github-io'
 
   # home page profile
   avatar = 'https://avatars.githubusercontent.com/u/127161266?v=4'
-  name = 'Enoque Leal'
-  bio = 'Ninguém é tão grande que não possa aprender, nem tão pequeno que não possa ensinar.'
 
-[menu]
+[languages]
+  [languages.pt]
+    languageCode = "pt"
+    languageName = "Português"
+    title = "Car Store"
+    weight = 1
+    [languages.pt.params]
+      name = 'Enoque Leal'
+      bio = 'Ninguém é tão grande que não possa aprender, nem tão pequeno que não possa ensinar.'
 
-  [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = 10
-  [[menu.main]]
-    identifier = "contact"
-    name = "YouTube"
-    url = "http://youtube.com/@enoque-dev"
-    weight = 10
+    [[languages.pt.menu.main]]
+      identifier = "about"
+      name = "Sobre"
+      url = "/about/"
+      weight = 10
+    [[languages.pt.menu.main]]
+      identifier = "contact"
+      name = "YouTube"
+      url = "http://youtube.com/@enoque-dev"
+      weight = 10
 
+  [languages.en]
+    languageCode = "en"
+    languageName = "English"
+    title = "Car Store"
+    weight = 2
+    [languages.en.params]
+      name = 'Enoque Leal'
+      bio = 'No one is so great that they cannot learn, nor so small that they cannot teach.'
+
+    [[languages.en.menu.main]]
+      identifier = "about"
+      name = "About"
+      url = "/en/about/"
+      weight = 10
+    [[languages.en.menu.main]]
+      identifier = "contact"
+      name = "YouTube"
+      url = "http://youtube.com/@enoque-dev"
+      weight = 10
 
 
 

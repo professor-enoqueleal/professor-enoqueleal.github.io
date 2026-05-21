@@ -1,0 +1,8 @@
+- id: prev_page
+  translation: 'Prev Page'
+
+- id: next_page
+  translation: 'Next Page'
+
+- id: featured
+  translation: 'Featured'

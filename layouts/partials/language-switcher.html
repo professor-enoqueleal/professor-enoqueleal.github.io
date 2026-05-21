@@ -1,0 +1,24 @@
+{{ if hugo.IsMultilingual }}
+<nav class="language-switcher flex items-center gap-2 text-sm">
+  {{ $currentLang := site.Language.Lang }}
+  {{ $translations := .Translations }}
+  {{ range site.Languages }}
+    {{ $lang := .Lang }}
+    {{ if eq $lang $currentLang }}
+      <span class="font-bold">{{ .LanguageName }}</span>
+    {{ else }}
+      {{ $link := "" }}
+      {{ range $translations }}
+        {{ if eq .Lang $lang }}
+          {{ $link = .Permalink }}
+        {{ end }}
+      {{ end }}
+      {{ if not $link }}
+        {{ $link = (printf "/%s/" $lang | absURL) }}
+      {{ end }}
+      <span class="opacity-40">|</span>
+      <a class="link opacity-60 hover:opacity-100" href="{{ $link }}">{{ .LanguageName }}</a>
+    {{ end }}
+  {{ end }}
+</nav>
+{{ end }}
