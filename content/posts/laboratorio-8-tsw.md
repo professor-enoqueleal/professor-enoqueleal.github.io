@@ -2,7 +2,7 @@
 title = "LAB 8 - Implementando a funcionalidade de Login com Spring Security"
 description = "Passo a passo para adicionar autenticação via formulário na camada web usando Spring Security (starter)."
 date = 2026-05-07
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "spring", "security", "login", "h2" ]
 +++

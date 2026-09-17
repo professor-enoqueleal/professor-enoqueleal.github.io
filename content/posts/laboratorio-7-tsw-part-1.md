@@ -2,7 +2,7 @@
 title = "LAB 7 - Integração com banco de dados via JDBC - PARTE 1"
 description = "Guia passo a passo para integrar uma aplicação Spring Boot com um banco relacional usando JDBC (JdbcTemplate) e JPA (Jakarta Persistence / Hibernate)."
 date = 2026-04-23
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "spring", "jpa", "jdbc", "h2" ]
 +++

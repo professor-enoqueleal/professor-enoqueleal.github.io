@@ -2,7 +2,7 @@
 title = "LAB 3 - Adicionando o Thymeleaf e o Bean validation na aplicação Spring Boot"
 description = "Este laboratório apresenta os conceitos do thymeleaf e do Bean Validation"
 date = "2026-03-19"
-draft = false
+draft = true
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
