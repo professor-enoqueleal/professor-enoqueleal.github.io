@@ -1,8 +1,8 @@
 +++
 title = "LAB 5 - Criando o método para UPDATE"
 description = "Este laboratório tem como objetivo apresentar uma forma básica sobre como atualizar dados em uma tabela no banco de dados!"
-date = 2025-04-11
-draft = true
+date = 2026-10-15
+draft = false
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
