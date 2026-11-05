@@ -1,8 +1,8 @@
 +++
 title = "LAB 7 - Criando a funcionalidade de login"
 description = "Este laboratório tem como objetivo apresentar uma forma básica sobre como implementar uma funcionalidade de login utilizando usuário e senha!"
-date = 2025-05-09
-draft = true
+date = 2026-11-05
+draft = false
 author = "Enoque Leal"
 tags = [ "java", "html", "web", "servlet" ]
 +++
