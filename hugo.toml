@@ -1,6 +1,6 @@
 theme = "hugo-paper"
 title = "Car Store"
-languageCode = "pt"
+locale = "pt-BR"
 DefaultContentLanguage = "pt"
 enableEmoji = true
 
