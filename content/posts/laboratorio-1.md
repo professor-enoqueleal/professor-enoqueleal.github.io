@@ -70,9 +70,9 @@ Agora que temos a aplicação devidamente criada, chegou a hora de adicionar o p
 
 1 - Com a aplicação criada, abra o arquivo *pom.xml*
 
-2 - O arquivo pom.xml é o arquivo utilizando pelo Maven para o processo de construção e empacotamento de uma aplicação Java. Este arquivo é composto por diferentes seções. Encontre a seção *<build>*. Dentro dessa seção, adicione o bloco de código a seguir.
+2 - O arquivo pom.xml é o arquivo utilizando pelo Maven para o processo de construção e empacotamento de uma aplicação Java. Este arquivo é composto por diferentes seções. Encontre a seção `<build>`. Dentro dessa seção, adicione o bloco de código a seguir.
 
-OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco *<build>*:
+OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco `<build>`:
 
 ```xml
 <plugins>
@@ -169,10 +169,10 @@ Agora que você já tem sua aplicação devidamente criada, já conseguiu subir 
 
 1 - Abra novamente o arquivo arquivo *pom.xml*
 
-2 - Localize o bloco *</dependencies>*. Você deverá adicionar duas dependências dentro do bloco *</dependencies>* no **pom.xml** da sua aplicação, conforme o código a seguir.
+2 - Localize o bloco `</dependencies>`. Você deverá adicionar duas dependências dentro do bloco `</dependencies>` no **pom.xml** da sua aplicação, conforme o código a seguir.
 
 
-OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco *<dependencies>*:
+OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco `<dependencies>`:
 
 ```xml
 <dependency>

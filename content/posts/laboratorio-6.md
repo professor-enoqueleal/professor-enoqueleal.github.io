@@ -27,7 +27,7 @@ Após concluir este laboratório, você deverá ser capaz de:
 
 No IntelliJ IDEA, abra o arquivo de configuração do projeto chamado "pom.xml" (geralmente localizado na raiz do projeto).
 
-Localize a seção <dependencies> e adicione a seguinte dependência:
+Localize a seção `<dependencies>` e adicione a seguinte dependência:
 
 ```xml
 

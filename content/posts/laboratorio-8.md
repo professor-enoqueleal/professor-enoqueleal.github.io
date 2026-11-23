@@ -267,7 +267,7 @@ A biblioteca (library) [Commons FileUpload](https://commons.apache.org/proper/co
 
 No IntelliJ IDEA, abra o arquivo de configuração do projeto chamado "pom.xml" (geralmente localizado na raiz do projeto).
 
-Localize a seção <dependencies> e adicione as seguintes dependências:
+Localize a seção `<dependencies>` e adicione as seguintes dependências:
 
 ```xml
 <dependency>

@@ -134,8 +134,8 @@ public class UserEntity {
 
 Crie **RoleRepository** e **UserRepository** no pacote **br.com.carstore.repository**:
 
-- **RoleRepository extends JpaRepository<RoleEntity, Long>** com método opcional **Optional<RoleEntity> findByName(String name)**;
-- **UserRepository extends JpaRepository<UserEntity, Long>** com **Optional<UserEntity> findByUsername(String username)**.
+- `RoleRepository extends JpaRepository<RoleEntity, Long>` com método opcional `Optional<RoleEntity> findByName(String name)`;
+- `UserRepository extends JpaRepository<UserEntity, Long>` com `Optional<UserEntity> findByUsername(String username)`.
 
 Exemplos (resumo):
 
@@ -437,7 +437,7 @@ curl -v -X POST -d "username=admin&password=admin123" http://localhost:8080/logi
 
 ### Parte 2 — Acessar endpoint protegido com cookie/CSRF (ou use o fluxo JWT se tiver implementado)
 
-> Observação: se você estiver usando a API stateless do LAB 9 com JWT, adapte o fluxo: gere o token e envie no header **Authorization: Bearer <token>**.
+> Observação: se você estiver usando a API stateless do LAB 9 com JWT, adapte o fluxo: gere o token e envie no header `Authorization: Bearer <token>`.
 
 ---
 
