@@ -1,5 +1,5 @@
 +++
-title = "LAB 8 - Criando a a funcionalidade de login (WIP)"
+title = "LAB 8 - Implementando o upload de imagens (WIP)"
 description = "Este laboratório visa apresentar uma forma básica sobre como implementar a capacidade de fazer upload de imagens!"
 date = 2024-05-08
 draft = true
@@ -38,7 +38,7 @@ Para podermos implementar a funcionalidade de *upload de imagens*, precisamos al
 * **Username:** sa
 * **Password:** sa
 
-3 - Após efetuar o login, vamos alterar a estrutura da tabela CAR adicionando uma nova coluna chamada **IMAGE** do tipo **VARCHAR** com o tamanho de **255**. O tamanho é importante porque dependendo do diretório onde a imagem for armazenada, pode ocupar muitos caracteres. 
+3 - Após efetuar o login, vamos alterar a estrutura da tabela CAR adicionando uma nova coluna chamada **IMAGE** do tipo **VARCHAR** com o tamanho de **255**. O tamanho é importante porque dependendo do diretório onde a imagem for armazenada, pode ocupar muitos caracteres.
 
 Para isso utilize o comando **SQL** a seguir:
 
@@ -52,7 +52,7 @@ ALTER TABLE CAR ADD IMAGE VARCHAR (255);
 
 Com a estrutura da tabela devidamente preparada para receber o caminho da imagem, precisamos alterar também as classes **Car.java** e **CarDao.java** adicionando uma nova variável do tipo String que iremos nomear também de image.
 
-1 - No IntelliJ navegue até o pacote *(package)* model que fica no diretório: car-store-guide/app/src/main/java/br.com.carstore.model e abra a classe **Car.java**
+1 - No IntelliJ navegue até o pacote *(package)* model que fica no diretório: carstore/src/main/java/br.com.carstore.model e abra a classe **Car.java**
 
 2 - Com a classe devidamente aberta, vamos adicionar uma nova variável chamada **image**, do tipo **String** e com o modificador **private**.
 
@@ -96,11 +96,11 @@ public class Car {
 
 ```
 
-4 - Agora vamos refatorar a classe **CarDao.java**. Para isso, no IntelliJ navegue até o pacote *(package)* **dao** que fica no diretório: car-store-guide/app/src/main/java/br.com.carstore.dao e abra a classe **CarDao.java**
+4 - Agora vamos refatorar a classe **CarDao.java**. Para isso, no IntelliJ navegue até o pacote *(package)* **dao** que fica no diretório: carstore/src/main/java/br.com.carstore.dao e abra a classe **CarDao.java**
 
 Com a classe devidamente aberta, vamos refatorar os métodos **createCar()**, **findAllCars()** e **updateCar()**. Precisamos refatorar esses métodos para que eles contemplem o novo campo **IMAGE** nas suas operações.
 
-5 - Refatorando o método **createCar()**. O Primeiro paço é alterar nossa String **SQL**, porque atualmente o comando está preparado apenas para **INSERT** de 1 campo, no caso o **NAME**. Precisamos alterar o comando para que ele contemple o **INSERT** em 2 campos, sendo eles **NAME** e **IMAGE**.
+5 - Refatorando o método **createCar()**. O primeiro passo é alterar nossa String **SQL**, porque atualmente o comando está preparado apenas para **INSERT** de 1 campo, no caso o **NAME**. Precisamos alterar o comando para que ele contemple o **INSERT** em 2 campos, sendo eles **NAME** e **IMAGE**.
 
 Sendo assim, vamos alterar a String SQL:
 
@@ -130,9 +130,7 @@ public void createCar(Car car) {
 
     try {
 
-        Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa","sa");
-
-        System.out.println("success in database connection");
+        Connection connection = ConnectionPoolConfig.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
@@ -153,17 +151,17 @@ public void createCar(Car car) {
 }
 ```
 
-Com isso a refatoração do método **createCar()** está pronta. 
+Com isso a refatoração do método **createCar()** está pronta.
 
-6 - Refatorando o método **findAllCar()**. Agora que já refatoramos o método **createCar()** e garantimos que o caminho da imagem esta sendo persistido no nosso banco de dados, chegou a hora de garantir que essas informações estão sendo retornadas nas nossas consultas. Para isso, precisamos refatorar o método **findAllCars()** inserindo o novo campo **(IMAGE)**. 
+6 - Refatorando o método **findAllCars()**. Agora que já refatoramos o método **createCar()** e garantimos que o caminho da imagem esta sendo persistido no nosso banco de dados, chegou a hora de garantir que essas informações estão sendo retornadas nas nossas consultas. Para isso, precisamos refatorar o método **findAllCars()** inserindo o novo campo **(IMAGE)**.
 
-A String SQL nesse caso não precisa ser alterada porque ela esta retornando todos os campos (select * ...). Portando, só precisamos adicionar o **getString("image")** no momento da interação do nosso **resultSet**. Para isso, faça a seguinte alteração:
+A String SQL nesse caso não precisa ser alterada porque ela esta retornando todos os campos (select * ...). Portando, só precisamos adicionar o **getString("image")** no momento da iteração do nosso **resultSet**. Para isso, faça a seguinte alteração:
 
 ```java
 // adicione essa linha dentro do bloco while
 String image = resultSet.getString("image");
 
-// Inseria o parâmetro image no momento de criar uma nova instância de Car
+// Insira o parâmetro image no momento de criar uma nova instância de Car
 Car car = new Car(carId, carName, image);
 
 ```
@@ -173,7 +171,7 @@ O código resultante da implementação deverá ser igual ao código a seguir:
 
 public List<Car> findAllCars(){
 
-    // código acima omitodo ...
+    // código acima omitido ...
 
     while(resultSet.next()){
 
@@ -187,7 +185,7 @@ public List<Car> findAllCars(){
 
     }
 
-    // código abaixo omitodo ...
+    // código abaixo omitido ...
 
 }
 ```
@@ -198,7 +196,7 @@ Com isso a refatoração do método **findAllCars()** está pronta.
 
 7 - Refatorando o método **updateCar()**. Agora que já refatoramos o método **findAllCars()** e garantimos que o caminho da imagem esta sendo retornado do nosso banco de dados, chegou a hora de garantir que essas informações estão sendo atualizadas corretamente. Para isso, precisamos refatorar o método **updateCar()** inserindo o novo campo **(IMAGE)**.
 
-A refatoração desse método será similar a do método **createCar()**. Precisamos alterar a String SQL e inserir os parâmetros (setString) corretamente no preparedStatement. 
+A refatoração desse método será similar a do método **createCar()**. Precisamos alterar a String SQL e inserir os parâmetros (setString) corretamente no preparedStatement.
 
 Sendo assim, vamos alterar a String SQL:
 
@@ -213,12 +211,13 @@ UPDATE CAR SET NAME = ?, IMAGE = ? WHERE ID = ?
 ```
 Agora a nossa String **SQL** esta preparada para fazer o **UPDATE** nas colunas **NAME** e **IMAGE** conforme o ID especificado.
 
-OBS: Atenção ao próximo passo, pois numero do index do ID vai mudar de 2 para 3, porque agora a imagem é o segundo parâmetro e o ID vai ser o terceiro.
+OBS: Atenção ao próximo passo, pois o número do índice do ID vai mudar de 2 para 3, porque agora a imagem é o segundo parâmetro e o ID vai ser o terceiro.
 
-Insira o código a seguir:
+Insira o código a seguir e altere o índice do ID para 3:
 
 ```java
-preparedStatement.setString(2, car.getImage())
+preparedStatement.setString(2, car.getImage());
+preparedStatement.setString(3, car.getId());
 ```
 
 O código resultante da implementação deverá ser igual ao código a seguir:
@@ -226,7 +225,7 @@ O código resultante da implementação deverá ser igual ao código a seguir:
 ```java
 public void updateCar(Car car) {
 
-    String SQL = "UPDATE CAR SET NAME = ? WHERE ID = ?";
+    String SQL = "UPDATE CAR SET NAME = ?, IMAGE = ? WHERE ID = ?";
 
     try {
 
@@ -295,7 +294,7 @@ Após salvar as alterações, o IntelliJ IDEA deve sincronizar automaticamente a
 
 Após adicionar a dependência no nosso projeto, podemos seguir com a implementação necessária. Três novos métodos serão criados agora, sendo eles, **uploadImage()**, **checkFieldType()** e **processUploadedFile()**. Cada um desses métodos tem sua responsabilidade bem definida e vamos falar sobre elas a seguir.
 
-1 - Vamos abrir nossa classe CreateCarServlet e refatora-la. Para isso, no IntelliJ navegue até o pacote *(package)* **servlet** que fica no diretório: car-store-guide/app/src/main/java/br.com.carstore.servlet e abra a classe **CreateCarServlet.java**.
+1 - Vamos abrir nossa classe CreateCarServlet e refatora-la. Para isso, no IntelliJ navegue até o pacote *(package)* **servlet** que fica no diretório: carstore/src/main/java/br.com.carstore.servlet e abra a classe **CreateCarServlet.java**.
 
 Com a classe devidamente aberta, vamos criar o método **uploadImage** que recebe por parâmetro uma instância de HttpServletRequest e devolve um Map de String. Esse método será responsável varrer toda a lista de parâmetros que recebemos do formulário HTML, chamar o método **checkFieldType**. Esse método será responsável por verificar se o conteúdo recebido do formulário HTML é um arquivo (**File**) ou apenas um texto simples (FormField). Se for um texto simples, pegaremos o nome do campo e o valor e adicionaremos no mapa de parâmetros. Se for um arquivo, o terceiro método **processUploadedFile** é chamado para realizar o upload do arquivo e armazenar o arquivo no diretório especificado.
 
@@ -334,7 +333,7 @@ private Map<String, String> uploadImage(HttpServletRequest httpServletRequest) {
 
 ```
 
-2 - Criando o método **checkFieldType**. A implementação desse método consiste em uma validação condicional responsável por verificar se o campo é do tipo file ou não. Se for file o método **processUploadedFile** é chamado. Se não for, apenas pegamos o valor do campo e adicionamos no map parameters.
+2 - Criando o método **checkFieldType**. A implementação desse método consiste em uma validação condicional responsável por verificar se o campo é do tipo file ou não. Se não for, apenas pegamos o valor do campo e adicionamos no map parameters. Se for file e o usuário tiver de fato escolhido um arquivo (tamanho maior que zero), o método **processUploadedFile** é chamado.
 
 O código resultante da implementação deverá ser igual ao código a seguir:
 
@@ -346,7 +345,7 @@ private void checkFieldType(FileItem item, Map requestParameters) throws Excepti
 
         requestParameters.put(item.getFieldName(), item.getString());
 
-    } else {
+    } else if (item.getSize() > 0) {
 
         String fileName = processUploadedFile(item);
         requestParameters.put("image", "img/".concat(fileName));
@@ -357,7 +356,7 @@ private void checkFieldType(FileItem item, Map requestParameters) throws Excepti
 
 ```
 
-3 - Criando o método **processUploadedFile()**. Esse método receberá por parâmetro uma instância de um objeto do tipo FileItem que contém um campo do tipo file. Com isso, criamos o nome do arquivo com base em um *timestemp*, removemos qualquer espaço em branco que exista no nome do arquivo e por último gravamos o arquivo em uma pasta chamada IMG dentro do nosso servidor.
+3 - Criando o método **processUploadedFile()**. Esse método receberá por parâmetro uma instância de um objeto do tipo FileItem que contém um campo do tipo file. Com isso, criamos o nome do arquivo com base em um *timestamp*, removemos qualquer espaço em branco que exista no nome do arquivo e por último gravamos o arquivo em uma pasta chamada IMG dentro do nosso servidor.
 
 O código resultante da implementação deverá ser igual ao código a seguir:
 
@@ -373,7 +372,9 @@ private String processUploadedFile(FileItem fileItem) throws Exception {
 
 ```
 
-4 - Agora que toda a implementação de upload foi feita, nós precisamos refatorar o método **doPost** para pegar os parametros do Mao que é devolvido pelo méotodo uploadImage ao invés de pegar do HttpServletRequest.
+**IMPORTANTE**: O método **processUploadedFile()** grava as imagens em uma pasta chamada **img** que precisa existir. No IntelliJ, clique com o botão direito do mouse em cima da pasta *webapp* (carstore/src/main/webapp), escolha a opção *New / Directory* e crie a pasta **img**. Coloque também dentro dessa pasta uma imagem chamada **default-car.jpg**: ela será utilizada sempre que ocorrer algum erro no upload. Sem a pasta *img*, o upload falha e o erro não aparece em nenhum lugar.
+
+4 - Agora que toda a implementação de upload foi feita, nós precisamos refatorar o método **doPost** para pegar os parâmetros do Map que é devolvido pelo método uploadImage em vez de pegar do HttpServletRequest. Repare que a lógica de cadastro ou atualização que criamos no laboratório 5 (verificando se o ID está vazio) continua existindo.
 
 O código resultante da implementação deverá ser igual ao código a seguir:
 
@@ -382,17 +383,43 @@ O código resultante da implementação deverá ser igual ao código a seguir:
 protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     Map<String, String> parameters = uploadImage(req);
-    
-    String carImagePath = parameters.get("image");
+
+    String carId = parameters.get("id");
     String carName = parameters.get("car-name");
-    
-    Car car = new Car("0", carName, carImagePath);
-    
-    new CarDao().createCar(car);
-    
+    String carImagePath = parameters.get("image");
+
+    CarDao carDao = new CarDao();
+    Car car = new Car(carId, carName, carImagePath);
+
+    if (carId == null || carId.isBlank()) {
+
+        carDao.createCar(car);
+
+    } else {
+
+        carDao.updateCar(car);
+
+    }
+
     resp.sendRedirect("/find-all-cars");
 
 }
+```
+
+OBS: Para que a classe **CreateCarServlet** compile, ela precisa dos imports a seguir (no IntelliJ, use o atalho **ALT + ENTER**):
+
+```java
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import java.io.File;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.apache.commons.fileupload.servlet.ServletFileUpload.isMultipartContent;
 ```
 
 5 - Salve todas as alterações **(CTRL + S)** e faça uma revisão de tudo que foi feito até aqui!
@@ -402,7 +429,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws I
 
 Agora precisamos alterar o nosso formulário index.jsp adicionando um novo input do tipo file. Esse **input** será responsável por possibilitar que de forma visual o utilizador do sistema consiga selecionar um arquivo para ser carregado.
 
-1 - Localize o formulário **index.jsp**. Para isso, no IntelliJ navegue até a pasta **webapp** que fica no diretório: car-store-guide/app/src/main/java/webapp e abra o arquivo index.jsp.
+1 - Localize o formulário **index.jsp**. Para isso, no IntelliJ navegue até a pasta **webapp** que fica no diretório: carstore/src/main/webapp e abra o arquivo index.jsp.
 
 2 - Com o arquivo devidamente aberto, vamos adicionar um novo campo *input* do tipo *file* dentro do nosso formulário:
 
@@ -415,6 +442,8 @@ Na sequência precisamos adicionar a propriedade **enctype="multipart/form-data"
 <form action="/create-car" method="post" enctype="multipart/form-data">
 ```
 
+OBS: Mantenha os campos *value="${param.name}"* e o *input hidden* do ID que criamos no laboratório 5. Sem eles, a funcionalidade de atualização (update) deixa de funcionar.
+
 O código resultante da implementação deverá ser igual ao código a seguir:
 
 ```html
@@ -426,7 +455,8 @@ O código resultante da implementação deverá ser igual ao código a seguir:
 
     <div>
         <label for="car-name" >Car Name</label>
-        <input type="text" name="car-name" id="car-name">
+        <input type="text" name="car-name" id="car-name" value="${param.name}">
+        <input type="hidden" id="id" name="id" value="${param.id}">
     </div>
     <div>
         <label for="image">Choose file</label>
@@ -444,11 +474,11 @@ O código resultante da implementação deverá ser igual ao código a seguir:
 3 - Salve todas as alterações **(CTRL + S)** e faça uma revisão tudo que foi feito até aqui!
 
 
-## Tarefa 5: Alterando a página dashboard.jsp (WIP)
+## Tarefa 6: Alterando a página dashboard.jsp (WIP)
 
 
 Parabéns! :+1:
 
 Você implementou a funcionalidade de upload de imagem. Agora no momento do cadastro de um carro, o usuário pode escolher uma imagem para cadastrar em conjunto com os dados do carro.
 
-Voltar para [LABORATÓRIO 7](./LABORATORIO-7.md) *ou* ir para LABORATÓRIO 9
+Voltar para [LABORATÓRIO 7]({{< ref "laboratorio-7.md" >}}) *ou* ir para LABORATÓRIO 9

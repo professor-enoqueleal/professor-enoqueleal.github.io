@@ -25,7 +25,7 @@ Após concluir este laboratório, você deverá ser capaz de:
 
 1 - Garanta que você possui o IntelliJ instalado no seu computador. Caso não tenha faça a instalação da versão *Community Edition*, conforme demonstrado nesse vídeo do youtube: [Instalando o IntelliJ no Windows](https://youtu.be/RBxAySum8UU). Ou clique no link a seguir, para fazer o *download* [link para download do intellij](https://www.jetbrains.com/idea/download/download-thanks.html?platform=macM1&code=IIC)
 
-![gif animado demonstrando como installar o intellij no windows](/gifs/01-instalando-intellij.gif)
+![gif animado demonstrando como instalar o intellij no windows](/gifs/01-instalando-intellij.gif)
 
 2 - Abra o IntelliJ
 
@@ -60,7 +60,7 @@ Depois disso basta aguardar toda a etapa de carregamento ser finalizada. No fina
 
 OBS: O processo de carregamento pode demorar alguns minutos, é imprescindível aguardar toda a etapa de carregamento ser finalizada.
 
-6 - Faça uma revisão tudo que foi feito até aqui!
+6 - Faça uma revisão de tudo que foi feito até aqui!
 
 ---
 
@@ -70,7 +70,7 @@ Agora que temos a aplicação devidamente criada, chegou a hora de adicionar o p
 
 1 - Com a aplicação criada, abra o arquivo *pom.xml*
 
-2 - O arquivo pom.xml é o arquivo utilizando pelo Maven para o processo de construção e empacotamento de uma aplicação Java. Este arquivo é composto por diferentes seções. Encontre a seção `<build>`. Dentro dessa seção, adicione o bloco de código a seguir.
+2 - O arquivo pom.xml é o arquivo utilizado pelo Maven para o processo de construção e empacotamento de uma aplicação Java. Este arquivo é composto por diferentes seções. Encontre a seção `<build>`. Dentro dessa seção, adicione o bloco de código a seguir.
 
 OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco `<build>`:
 
@@ -149,17 +149,30 @@ OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a s
 </plugins>
 ```
 
-5 - Salve todas as alterações **(CTRL + S)** e depois clique no botão *Load Maven Changes*. Com isso, o Maven irá identificar que novos *plugins* foram adicionados no projeto e irá fazer o download dos mesmos de forma automática. Aguarde o carregamento finalizar.
+5 - Ainda no arquivo *pom.xml*, precisamos informar ao Maven qual versão do Java deve ser utilizada para compilar o projeto. O *archetype* não define essa versão e, sem ela, o projeto não compila nas versões atuais do Java (o erro exibido é *Source option 5 is no longer supported*).
 
-6 - Feito isso, já é possível executar a aplicação e renderizar sua primeira página web no browser. Para isso, navegue até o menu Maven dentro do IntelliJ, expanda o projeto *carstore*, depois clique em *plugins*, depois clique em *tomcat7* e por último clique duas vezes na opção *tomcat7:run*. Fazendo isso o servidor web (Servlet Container) será ligado (start).
+Localize a linha que contém a tag `<url>` e, logo abaixo dela, adicione o bloco a seguir:
 
-7 - Após o processo de carregamento, abra uma aba no seu browser e digite o endereço a seguir: http://localhost:8080
+```xml
+<properties>
+  <maven.compiler.source>11</maven.compiler.source>
+  <maven.compiler.target>11</maven.compiler.target>
+</properties>
+```
 
-8 - Uma página web deverá ser renderizada contendo a mensagem **Hello, world!**
+OBS: Caso o seu *pom.xml* já possua um bloco `<properties>` com os valores `1.7`, apenas troque esses valores para `11`.
+
+6 - Salve todas as alterações **(CTRL + S)** e depois clique no botão *Load Maven Changes*. Com isso, o Maven irá identificar que novos *plugins* foram adicionados no projeto e irá fazer o download dos mesmos de forma automática. Aguarde o carregamento finalizar.
+
+7 - Feito isso, já é possível executar a aplicação e renderizar sua primeira página web no browser. Para isso, navegue até o menu Maven dentro do IntelliJ, expanda o projeto *carstore*, depois clique em *plugins*, depois clique em *tomcat7* e por último clique duas vezes na opção *tomcat7:run*. Fazendo isso o servidor web (Servlet Container) será ligado (start).
+
+8 - Após o processo de carregamento, abra uma aba no seu browser e digite o endereço a seguir: http://localhost:8080
+
+9 - Uma página web deverá ser renderizada contendo a mensagem **Hello World!**
 
 ![gif animado demonstrando como executar o projeto que foi criando](/gifs/05-executando-o-servidor.gif)
 
-9 - Faça uma revisão tudo que foi feito até aqui!
+10 - Faça uma revisão de tudo que foi feito até aqui!
 
 ---
 
@@ -167,9 +180,9 @@ OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a s
 
 Agora que você já tem sua aplicação devidamente criada, já conseguiu subir seu servidor web, chegou a hora de criar sua primeira Servlet e fazer sua primeira requisição **http**
 
-1 - Abra novamente o arquivo arquivo *pom.xml*
+1 - Abra novamente o arquivo *pom.xml*
 
-2 - Localize o bloco `</dependencies>`. Você deverá adicionar duas dependências dentro do bloco `</dependencies>` no **pom.xml** da sua aplicação, conforme o código a seguir.
+2 - Localize o bloco `<dependencies>`. Você deverá adicionar duas dependências dentro do bloco `<dependencies>` no **pom.xml** da sua aplicação, conforme o código a seguir.
 
 
 OBS: Nenhum código deve ser removido nessa etapa. Apenas adicione o código a seguir dentro do bloco `<dependencies>`:
@@ -243,7 +256,7 @@ public class CreateCarServlet extends HttpServlet {
 ```
 ![gif animado demonstrando como sobrescrever o método doPost](/gifs/09-override-dopost.gif)
 
-9 - Após ter sobrescrito o método doPost, vamos implementar a chamada para o req.getParameter("car-name"). É dessa forma que pegamos as informações que serão enviadas através do formulário html. 
+9 - Após ter sobrescrito o método doPost, vamos implementar a chamada para o req.getParameter("car-name"). É dessa forma que pegamos as informações que serão enviadas através do formulário html.
 
 Dentro do método doPost(), apague a linha **super.doPost(req, resp)** e na sequência implemente o seguinte código:
 
@@ -287,7 +300,9 @@ public class CreateCarServlet extends HttpServlet {
 
 10 - O último passo será a implementação do formulário HTML. Esse formulário deverá conter três elementos. Um *label* contendo o nome do campo, um *input* para que o usuário possa escrever o valor no formato texto e um *button* para que o usuário possa clicar e submeter (submit) a requisição *http* para o servidor.
 
-No seu projeto, navegue até o diretório: car-store-guide/app/src/main/webapp/index.html
+No seu projeto, navegue até o diretório: carstore/src/main/webapp. O *archetype* criou nesse diretório um arquivo chamado **index.jsp** (é a página *Hello World!* que você viu na Tarefa 2). Apague esse arquivo (clique com o botão direito do mouse em cima dele e escolha a opção *Delete*).
+
+Depois, clique com o botão direito do mouse em cima da pasta *webapp*, escolha a opção *New* e depois *File* e crie um novo arquivo chamado **index.html**.
 
 A implementação do formulário deverá ser igual ao código a seguir:
 
@@ -309,10 +324,10 @@ A implementação do formulário deverá ser igual ao código a seguir:
 </html>
 ```
 
-11 - Faça uma revisão tudo que foi feito até aqui!
+11 - Faça uma revisão de tudo que foi feito até aqui!
 
 ---
 
 Parabéns! :+1:
 
-Você criou uma nova aplicação Web utilizando **Java**, **Maven** e um **Archetype** Web. Adicionou o plugin do *Tomcat Embed* e o Plugin de *Build* do Maven. Criou sua primeira Servlet e sobrescreveu o método doPost, preparando ele para receber um atributo que você receberá no Java quando o seu formulário html for submetido. Depois você criou um formulário html contento um campo input text para que o usuário possa fazer a requisiçãp. Com isso já é possível subir o servidor e renderizar a nossa primeira página web, fazer a primeira requisição e recuperar o valor enviado na sua Java Servlet.
+Você criou uma nova aplicação Web utilizando **Java**, **Maven** e um **Archetype** Web. Adicionou o plugin do *Tomcat Embed* e o Plugin de *Build* do Maven. Criou sua primeira Servlet e sobrescreveu o método doPost, preparando ele para receber um atributo que você receberá no Java quando o seu formulário html for submetido. Depois você criou um formulário html contento um campo input text para que o usuário possa fazer a requisição. Com isso já é possível subir o servidor e renderizar a nossa primeira página web, fazer a primeira requisição e recuperar o valor enviado na sua Java Servlet.

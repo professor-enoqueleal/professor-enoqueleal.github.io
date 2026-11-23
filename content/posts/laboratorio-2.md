@@ -1,6 +1,6 @@
 +++
-title = "LAB 2 - Criando o método para INSERT e configurando a conexão com o com o banco de dados"
-description = "Este laboratório apresenta os conceitos básicos para criar uma aplicação Java Web contendo uma camada de persitêcia de dados!"
+title = "LAB 2 - Criando o método para INSERT e configurando a conexão com o banco de dados"
+description = "Este laboratório apresenta os conceitos básicos para criar uma aplicação Java Web contendo uma camada de persistência de dados!"
 date = 2026-09-24
 draft = false
 author = "Enoque Leal"
@@ -9,12 +9,12 @@ tags = [ "java", "html", "web", "servlet" ]
 
 ## Visão geral e objetivos do laboratório
 
-Este laboratório apresenta os conceitos básicos para criar uma aplicação Java Web contendo uma camada de persitêcia de dados!
+Este laboratório apresenta os conceitos básicos para criar uma aplicação Java Web contendo uma camada de persistência de dados!
 
 Após concluir este laboratório, você deverá ser capaz de:
 
 - Provisionar uma camada de persistência para a aplicação Java Web;
-- Subir um servidor Tomcat (Servlet Container) e um banco de dados em memória (H2 DB) embed para executar sua aplicação Java e persistir seus dados;
+- Subir um servidor Tomcat (Servlet Container) e um banco de dados embarcado (H2 DB) para executar sua aplicação Java e persistir seus dados;
 - Fazer requisições http através de um formulário HTML e capturar os dados dessa requisição em uma Servlet;
 - Gravar os dados que foram capturados de um formulário HTML e persisti-los em um banco de dados (insert).
 
@@ -28,13 +28,13 @@ Após concluir este laboratório, você deverá ser capaz de:
 
 ## Tarefa 1: Adicionar uma nova dependência ao seu projeto
 
-Agora que você já tem sua aplicação devidamente criada, já conseguiu subir seu servidor web, chegou a hora de adicionar uma camada de persistência de dados na sua aplicação. 
+Agora que você já tem sua aplicação devidamente criada, já conseguiu subir seu servidor web, chegou a hora de adicionar uma camada de persistência de dados na sua aplicação.
 
-1 - Abra o arquivo arquivo **pom.xml**
+1 - Abra o arquivo **pom.xml**
 
 2 - Localize o bloco **dependencies**. Você deverá adicionar uma nova dependência dentro deste bloco.
 
-**OBS**: Nenhuma dependência deve ser removida nesse processo. Adicione a dependência a seguir dentro do bloco **dependencies**: 
+**OBS**: Nenhuma dependência deve ser removida nesse processo. Adicione a dependência a seguir dentro do bloco **dependencies**:
 
 ```xml
 <dependency>
@@ -79,18 +79,18 @@ Agora que você já tem sua aplicação devidamente criada, já conseguiu subir 
 
 ```
 
-4 - Faça uma revisão tudo que foi feito até aqui!
+4 - Faça uma revisão de tudo que foi feito até aqui!
 
 Parabéns! :+1:
 
-Você adicionou a dependência do H2 DB (Banco de dados em memória).
+Você adicionou a dependência do H2 DB (banco de dados embarcado).
 
 
 ## Tarefa 2: Registrando o listener do H2 DB no arquivo web.xml
 
 :warning: Para saber mais sobre o H2 DB, visite a documentação oficial através desse link: [H2 Database Engine](https://www.h2database.com)
 
-1 - Agora que a dependência do H2 foi adicionada ao projeto, será necessário registrar o *listener* do H2 no arquivo web.xml. Para isso navegue até o arquivo web.xml. Este arquivo fica localizado no diretório: car-store/src/main/webapp/WEB-INF/web.xml
+1 - Agora que a dependência do H2 foi adicionada ao projeto, será necessário registrar o *listener* do H2 no arquivo web.xml. Para isso navegue até o arquivo web.xml. Este arquivo fica localizado no diretório: carstore/src/main/webapp/WEB-INF/web.xml
 
 2 - Com o arquivo web.xml aberto, adicione o *listener* dentro do bloco *web-app* conforme código a seguir:
 
@@ -113,7 +113,7 @@ Você adicionou a dependência do H2 DB (Banco de dados em memória).
 
 **OBS**: Nenhuma configuração deverá ser removida nesse processo.
 
-3 - O resultado final deverá ser igual ao código a seguir:
+3 - Além do *listener*, precisamos atualizar o cabeçalho do arquivo. O *web.xml* gerado pelo *archetype* utiliza a versão 2.3 da especificação de Servlets. Nessa versão, as expressões `${...}` que usaremos nas páginas JSP nos próximos laboratórios não funcionam. Por isso, substitua todo o conteúdo do arquivo *web.xml* pelo código a seguir, que já utiliza a versão 3.0:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -142,7 +142,7 @@ Você adicionou a dependência do H2 DB (Banco de dados em memória).
 </web-app>
 ```
 
-4 - Salve todas as alterações **(CTRL + S)** e execute sua aplicação *(tomcat7:run)*. Com o *listener* do **H2 DB** devidamente registrado, é possível acessar a console de gerênciamento através do link: *http://localhost:8080/console*
+4 - Salve todas as alterações **(CTRL + S)** e execute sua aplicação *(tomcat7:run)*. Com o *listener* do **H2 DB** devidamente registrado, é possível acessar a console de gerenciamento através do link: *http://localhost:8080/console*
 
 5 - Após acessar a console do **H2 DB**, faça o login utilizando as informações a seguir:
 
@@ -150,6 +150,8 @@ Você adicionou a dependência do H2 DB (Banco de dados em memória).
     * JDBC URL: jdbc:h2:~/test
     * User Name: sa
     * Password: sa
+
+**OBS**: Apesar de ser um banco de dados embarcado (ele sobe junto com a aplicação), o H2 grava os dados em um arquivo chamado *test.mv.db* na pasta do seu usuário (é isso que o `~` da JDBC URL significa). Por isso os dados não se perdem quando a aplicação é reiniciada.
 
 6 - Após efetuar o login, você poderá criar sua primeira tabela. Você deverá criar uma tabela chamada **CAR**. Para isso utilize o comando **SQL** a seguir:
 
@@ -159,23 +161,23 @@ CREATE TABLE CAR(ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(255));
 
 ![gif animado demonstrando como criar_uma_tabela_no_h2_db](/gifs/11-criando-tabela-no-h2.gif)
 
-7 - Faça uma revisão tudo que foi feito até aqui!
+7 - Faça uma revisão de tudo que foi feito até aqui!
 
 Parabéns! :+1:
 
-Você adicionou a dependência de um banco de dados em memória (H2 DB) na sua aplicação Java Web. Agora que você adicionou a dependência do H2 DB no arquivo pom.xml da sua aplicação, ao fazer o start *(tomcat7:run)*, quando a aplicação é iniciada temos um banco de dados relacional a nossa disposição e temos também uma console para gerenciamento do mesmo.
+Você adicionou a dependência de um banco de dados embarcado (H2 DB) na sua aplicação Java Web. Agora que você adicionou a dependência do H2 DB no arquivo pom.xml da sua aplicação, ao fazer o start *(tomcat7:run)*, quando a aplicação é iniciada temos um banco de dados relacional a nossa disposição e temos também uma console para gerenciamento do mesmo.
 
 
 ## Tarefa 3: Criando a primeira Model e a primeira DAO
 
-Agora que temos tem um banco de dados devidamente configurado, chegou a hora de criar a primeira classe model (Car) e a primeira classe DAO (CarDao).
+Agora que temos um banco de dados devidamente configurado, chegou a hora de criar a primeira classe model (Car) e a primeira classe DAO (CarDao).
 
-1 - Agora vamos criar dois novos pacotes (packages), o primeiro se chama *dao* e o segundo *model*. Para isso, navegue até o pacote principal (br.com.carstore). No seu projeto, navegue até o diretório: car-store-guide/app/src/main/java/br.com.carstore, clique com o botão direito do mouse em cima do pacote principal (br.com.carstore) e escolha a opção *New / Package* e insira o nome do primeiro pacote (dao). Repita a operação para criar o segundo pacote (dao).
+1 - Agora vamos criar dois novos pacotes (packages), o primeiro se chama *dao* e o segundo *model*. Para isso, navegue até o pacote principal (br.com.carstore). No seu projeto, navegue até o diretório: carstore/src/main/java/br.com.carstore, clique com o botão direito do mouse em cima do pacote principal (br.com.carstore) e escolha a opção *New / Package* e insira o nome do primeiro pacote (dao). Repita a operação para criar o segundo pacote (model).
 
 No final da criação, o resultado esperado é que tenhamos agora três subpacotes dentro do pacote principal seguindo a hierarquia:
 
 ```
-car-store/
+carstore/
 |..| src/
 |  |..| main/
 |  |  |..| java/
@@ -193,7 +195,7 @@ car-store/
 
 2 - Agora com os novos pacotes devidamente criados, vamos criar a nossa classe model chamada Car. Para isso, clique com o botão direito do mouse em cima do pacote model, escolha a opção *New, Java Class*, depois digite *Car* e aperte a tecla ENTER. O assistente de criação do IntelliJ irá criar uma nova classe Java chamada **Car**.
 
-3 - Com a classe Car devidamente criada, vamos criar um atribute para ela do tipo *String* com o modificador de acesso *privado (private)* e com o nome de **name**.
+3 - Com a classe Car devidamente criada, vamos criar um atributo para ela do tipo *String* com o modificador de acesso *privado (private)* e com o nome de **name**.
 
 4 - Crie os métodos acessores (getters and setters) para esse atributo que acabamos de criar *(private String name)*.
 
@@ -282,18 +284,55 @@ public class CarDao {
 }
 ```
 
-8 - Atenção em toda a implementação e nos imports. Nessa etapa nenhum erro deve ser sinalizado pela sua IDE. Caso seu IDE sinalize algum erro, reveja todos os passos anteriores para garantir que esteja tudo correto.
+8 - Agora precisamos fazer com que a nossa servlet **CreateCarServlet** utilize a classe **CarDao**. Até aqui ela apenas escreve o nome do carro no console. Abra a classe **CreateCarServlet**, que fica no pacote *br.com.carstore.servlet*, e substitua a linha **System.out.println(carName);** pela criação de um objeto do tipo **Car** e pela chamada ao método **createCar()**.
 
-9 - Com toda a implementação devidamente feita, já é possível testar o projeto para garantir que tudo funciona corretamente.
+O código resultante deverá ser igual ao código a seguir:
+
+```java
+package br.com.carstore.servlet;
+
+import br.com.carstore.dao.CarDao;
+import br.com.carstore.model.Car;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/create-car")
+public class CreateCarServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String carName = request.getParameter("car-name");
+
+        Car car = new Car();
+        car.setName(carName);
+
+        new CarDao().createCar(car);
+
+        request.getRequestDispatcher("index.html").forward(request, response);
+
+    }
+
+}
+```
+
+9 - Atenção em toda a implementação e nos imports. Nessa etapa nenhum erro deve ser sinalizado pela sua IDE. Caso seu IDE sinalize algum erro, reveja todos os passos anteriores para garantir que esteja tudo correto.
+
+10 - Com toda a implementação devidamente feita, já é possível testar o projeto para garantir que tudo funciona corretamente.
 
 ![gif animado demonstrando o projeto funcionando e gravando dados no h2 db](/gifs/12-mostrando-o-projeto-funcionando.gif)
 
-10 - Faça uma revisão tudo que foi feito até aqui!
+11 - Faça uma revisão de tudo que foi feito até aqui!
 
 ---
 
 Parabéns! :+1:
 
-Você adicionou a dependência de um banco de dados em memória (H2 DB) na sua aplicação Java Web, criou a primeira classe model e dao. Implementou a lógica para abrir uma conexão com o bando de dados (H2) e o comando de persistência (insert) dos dados no banco.
+Você adicionou a dependência de um banco de dados embarcado (H2 DB) na sua aplicação Java Web, criou a primeira classe model e dao. Implementou a lógica para abrir uma conexão com o banco de dados (H2) e o comando de persistência (insert) dos dados no banco.
 
 Agora ao fazer o start *(tomcat7:run)*, quando a aplicação é iniciada temos um banco de dados relacional a nossa disposição e temos também uma console para gerenciamento do mesmo. Nesse momento a parte do create do nosso CRUD está implementada e funcionando.

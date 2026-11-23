@@ -26,7 +26,7 @@ Agora que você já tem sua aplicação devidamente criada, já conseguiu subir 
 
 1 - Para isso, vamos criar um novo método chamado **deleteCarById()**. Esse método deverá ser criado dentro da classe **CarDao**.
 
-OBS: A classe **CarDao** já existe e possui dois métodos, sendo eles **createCar()** e **findAllCars**. Nesta seção nós vamos apenas criar /adicionar um novo método dentro dessa classe. O nome do método deve ser **deleteCarById()**. Este méotodo receberá uma String como parâmetro e o seu retorno será do tipo *void*.
+OBS: A classe **CarDao** já existe e possui dois métodos, sendo eles **createCar()** e **findAllCars**. Nesta seção nós vamos apenas criar /adicionar um novo método dentro dessa classe. O nome do método deve ser **deleteCarById()**. Este método receberá uma String como parâmetro e o seu retorno será do tipo *void*.
 
 Para isso, abra a classe **CarDao** e implemente o método **deleteCarById()**. O código resultante deverá ser igual ao código a seguir:
 
@@ -37,17 +37,17 @@ public void deleteCarById(String carId) {
 }
 ```
 
-2 - Agora vamos implementar a lógica que faz a remocão / delete do dado no banco de dados. O primeiro passo é criar uma variável do tipo string que chamaremos de SQL. Essa variável recebe como valor uma string contento o comando SQL para fazer o delete (DELETE CAR WHERE ID = ?).
+2 - Agora vamos implementar a lógica que faz a remoção / delete do dado no banco de dados. O primeiro passo é criar uma variável do tipo string que chamaremos de SQL. Essa variável recebe como valor uma string contendo o comando SQL para fazer o delete (DELETE FROM CAR WHERE ID = ?).
 
 ```java
 public void deleteCarById(String carId) {
 
-    String SQL = "DELETE CAR WHERE ID = ?";
+    String SQL = "DELETE FROM CAR WHERE ID = ?";
 
 }
 ```
 
-OBS: Esse comando fará a remoção do dado armazenado na nossa tabela de acordo com o ID informado. 
+OBS: Esse comando fará a remoção do dado armazenado na nossa tabela de acordo com o ID informado.
 
 
 3 - O restante da implementação do método será bem similar a implementação que fizemos anteriormente no método **createCar()**. Teremos o bloco *try / catch* e também as mensagens de feedback para que possamos saber se a operação foi bem sucedida ou não.
@@ -57,7 +57,7 @@ O código resultante deverá ser igual ao código a seguir:
 ```java
 public void deleteCarById(String carId) {
 
-    String SQL = "DELETE CAR WHERE ID = ?";
+    String SQL = "DELETE FROM CAR WHERE ID = ?";
 
     try {
 
@@ -130,7 +130,7 @@ Após executar a chamada para a classe **carDao** e no método **deleteCarById**
 
 Para que o comando de *remoção / delete* funcione corretamente, nós precisamos que o ID do carro cadastrado seja retornado no momento da consulta. Para isso teremos que fazer uma refatoração no nosso código.
 
-1 - O primeiro passo é refatorar a classe *model* **Car**, adicionando uma nova variável do tipo *String* chamada *id* e um novo construtor sobrecarregado que recebe o *ID* e o *Name* por parametrô. Abra a classe Car que esta localizada dentro do pacote *br.com.carstore.model*, crie uma nova variável privada / private do tipo String chamada ID e crie o seu respectivo método *(getter)* getId(). Na sequência, crie um construtor que recebe *id* e *name* como parâmetro.
+1 - O primeiro passo é refatorar a classe *model* **Car**, adicionando uma nova variável do tipo *String* chamada *id* e um novo construtor sobrecarregado que recebe o *ID* e o *Name* por parâmetro. Abra a classe Car que esta localizada dentro do pacote *br.com.carstore.model*, crie uma nova variável privada / private do tipo String chamada ID e crie o seu respectivo método *(getter)* getId(). Na sequência, crie um construtor que recebe *id* e *name* como parâmetro.
 
 OBS: Nenhum código deve ser removido nesta etapa. Apenas adicione uma nova variável e o construtor sobrecarregado.
 
@@ -228,7 +228,7 @@ Após a refatoração, o código resultante deverá ser igual ao código a segui
 
 ```
 
-4 - Faça uma revisão tudo que foi feito até aqui!
+4 - Faça uma revisão de tudo que foi feito até aqui!
 
 Parabéns! :+1:
 
@@ -258,7 +258,7 @@ Agora que o ID do carro é exibido na página, chegou a hora de implementar a l�
 </table>
 ```
 
-2 - O valor que será preenchido será um formulário (form) que ao ser submetido, fará uma requisição HTTP para a nossa nova servlet **DeleteCarServlet** passando o ID do veículo como parametrô.
+2 - O valor que será preenchido será um formulário (form) que ao ser submetido, fará uma requisição HTTP para a nossa nova servlet **DeleteCarServlet** passando o ID do veículo como parâmetro.
 
 O código resultante deverá ser igual ao código a seguir:
 
@@ -286,7 +286,7 @@ O código resultante deverá ser igual ao código a seguir:
 
 ![imagem mostrando o botão delete sendo renderizado no formulário de listagem](/images/02-formulario-com-o-botao.png)
 
-3 - Faça uma revisão tudo que foi feito até aqui!
+3 - Faça uma revisão de tudo que foi feito até aqui!
 
 ![gif animado demonstrando a remoção funcionando](/gifs/14-delete-funcionando.gif)
 
@@ -294,4 +294,4 @@ O código resultante deverá ser igual ao código a seguir:
 
 Parabéns! :+1:
 
-Você criou a terceira parte do CRUD (delete). Implementou o médoto *deleteCarById()* e agora os dados já são deletados no banco de dados. 
+Você criou a terceira parte do CRUD (delete). Implementou o método *deleteCarById()* e agora os dados já são deletados no banco de dados.

@@ -1,6 +1,6 @@
 +++
 title = "LAB 3 - Criando o método para SELECT"
-description = "Este laboratório apresenta as ações básicas criar uma camada de consulta na camada de persitêcia de dados!"
+description = "Este laboratório apresenta as ações básicas criar uma camada de consulta na camada de persistência de dados!"
 date = 2026-10-01
 draft = false
 author = "Enoque Leal"
@@ -9,7 +9,7 @@ tags = [ "java", "html", "web", "servlet" ]
 
 ## Visão geral e objetivos do laboratório
 
-Este laboratório apresenta as ações básicas criar uma camada de consulta na camada de persitêcia de dados!
+Este laboratório apresenta as ações básicas criar uma camada de consulta na camada de persistência de dados!
 
 Após concluir este laboratório, você deverá ser capaz de:
 
@@ -24,7 +24,7 @@ Após concluir este laboratório, você deverá ser capaz de:
 
 Agora que você já tem sua aplicação devidamente criada, já conseguiu subir seu servidor web. Já consegue gravar os dados no banco de dados, chegou a hora de implementar uma camada de consulta dos dados persistidos no banco de dados da sua aplicação.
 
-1 - Para isso, vamos refatorar a classe model **Car**, removendo o método setter e criando um construtor sobrecarregado. Abra a classe Car, apague o método getName() e criei um construtor que recebe name como parâmetro.
+1 - Para isso, vamos refatorar a classe model **Car**, removendo o método setter e criando um construtor sobrecarregado. Abra a classe Car, apague o método setName() e crie um construtor que recebe name como parâmetro.
 
 O código resultante deverá ser igual ao código a seguir:
 
@@ -47,9 +47,9 @@ public class Car {
 }
 ```
 
-2 - Devido a essa refatoração na classe **Car**, é necessário fazer um ajuste na classe **CreateCarServlet.java**, removendo a linha **car.setCarName(carName)** e passando o parâmetro carName via construtor **Car car = new Car(carName)**.
+2 - Devido a essa refatoração na classe **Car**, é necessário fazer um ajuste na classe **CreateCarServlet.java**, substituindo as linhas **Car car = new Car();** e **car.setName(carName);** pela linha **Car car = new Car(carName);**, que passa o parâmetro carName via construtor.
 
-Após a refotoração, o código da classe **CreateCarServlet.java** deverá ser igual ao código a seguir:
+Após a refatoração, o código da classe **CreateCarServlet.java** deverá ser igual ao código a seguir:
 
 ```java
 package br.com.carstore.servlet;
@@ -63,13 +63,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/create-car")
 public class CreateCarServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String carName = req.getParameter("car-name");
 
@@ -93,9 +92,9 @@ public List<Car> findAllCars() {
 
 }
 ```
-Nesse momento o seu IDE vai esta alertando erro porque o retorno (return) ainda não foi implementado. Não se preocupe porque isso será resolvido no passo a seguir.
+Nesse momento o seu IDE vai estar alertando erro porque o retorno (return) ainda não foi implementado. Não se preocupe porque isso será resolvido no passo a seguir.
 
-4 - Agora vamos implementar a lógica que faz a busca dos dados no banco de dados. O primeiro passo é criar nossa string SQL contento o comando SQL para a busca (SELECT * FROM).
+4 - Agora vamos implementar a lógica que faz a busca dos dados no banco de dados. O primeiro passo é criar nossa string SQL contendo o comando SQL para a busca (SELECT * FROM).
 
 O código resultante deverá ser igual ao código a seguir:
 
@@ -157,7 +156,16 @@ O código resultante deverá ser igual ao código a seguir:
     }
 ```
 
-6 - Agora que já implementamos o método findAllCar que retorna uma lista com todos os carros que foram cadastrados na nossa tabela Car, podemos seguir com a criação da nossa Servlet responsável por receber as requisições de consulta.
+OBS: Para que esse código compile, a classe **CarDao** precisa dos imports a seguir. No IntelliJ, você pode posicionar o cursor em cima de cada classe sublinhada em vermelho e usar o atalho **(ALT + ENTER)** para importá-la.
+
+```java
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+```
+
+6 - Agora que já implementamos o método findAllCars que retorna uma lista com todos os carros que foram cadastrados na nossa tabela Car, podemos seguir com a criação da nossa Servlet responsável por receber as requisições de consulta.
 
 No pacote servlet, selecione a opção *New* e depois a opção *Java Class*. No assistente de criação, digite o nome da classe: **ListCarServlet**.
 
@@ -192,7 +200,7 @@ public class ListCarServlet extends HttpServlet {
 }
 ```
 
-7 - Agora com a classe **ListCarServlet** criada e o método doGet sobrescrito, podemos implementar a lógica que chamará a classe CarDao e o médoto **findAllCars()**.
+7 - Agora com a classe **ListCarServlet** criada e o método doGet sobrescrito, podemos implementar a lógica que chamará a classe CarDao e o método **findAllCars()**.
 
 O código resultante deverá ser igual ao código a seguir:
 
@@ -227,7 +235,7 @@ public class ListCarServlet extends HttpServlet {
 }
 ```
 
-Perceba que agora estamos redirecionando o usuário para uma nóva página chamada dashboard.jsp. Essa página ainda não existe e vamos cria-la no passo a seguir.
+Perceba que agora estamos redirecionando o usuário para uma nova página chamada dashboard.jsp. Essa página ainda não existe e vamos cria-la no passo a seguir.
 
 8 - Agora vamos criar a página para exibir o resultado da nossa consulta em uma tabela (table) na nossa página HTML.
 
@@ -292,7 +300,7 @@ Após adicionar o import da tag library e o laço for, o código resultante deve
 </html>
 ```
 
-10 - O ultimo passo é redirecionar o usuário para a nova página a pós a criação (insert) de um novo carro no nosso banco de dados. Para isso, na classe **CreateCarServlet**, troque a linha que contém o código:
+10 - O ultimo passo é redirecionar o usuário para a nova página após a criação (insert) de um novo carro no nosso banco de dados. Para isso, na classe **CreateCarServlet**, troque a linha que contém o código:
 
 ```java
  req.getRequestDispatcher("index.html").forward(req, resp);
@@ -303,12 +311,12 @@ Pela linha a seguir:
 resp.sendRedirect("/find-all-cars");
 ```
 
-Feito isso, após a criação de um novo carro, a requisição será redirecionada para a nossa nova servlet **ListCarServlet** que executará o método **doPost()**, fará a consulta no banco de dados e no final irá redirecionar o usuário para a página dashboard.jsp onde os cadastraados no banco de dados serão renderizados no browser.
+Feito isso, após a criação de um novo carro, a requisição será redirecionada para a nossa nova servlet **ListCarServlet** que executará o método **doGet()**, fará a consulta no banco de dados e no final irá redirecionar o usuário para a página dashboard.jsp onde os carros cadastrados no banco de dados serão renderizados no browser.
 
-11 - Faça uma revisão tudo que foi feito até aqui!
+11 - Faça uma revisão de tudo que foi feito até aqui!
 
 ---
 
 Parabéns! :+1:
 
-Você criou a segunda parte do no CRUD (read). Implementou o médoto findAllCar e agora os dados já são consultados no banco de dados e exibidos em nosso novo formulário HTML. 
+Você criou a segunda parte do CRUD (read). Implementou o método findAllCars e agora os dados já são consultados no banco de dados e exibidos em nosso novo formulário HTML.

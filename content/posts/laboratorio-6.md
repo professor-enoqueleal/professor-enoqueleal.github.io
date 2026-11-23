@@ -50,7 +50,7 @@ OBS: Após salvar as alterações, o IntelliJ IDEA deve sincronizar automaticame
 
 1 - Crie uma classe de configuração para o pool de conexões
 
-No IntelliJ IDEA, navegue até o pacote principal *br.com.carstore.servlet*, clique com o botão direto do mouse e selecione *New / Package* digite **config** e pressione a tecla ENTER.
+No IntelliJ IDEA, navegue até o pacote principal *br.com.carstore*, clique com o botão direito do mouse e selecione *New / Package* digite **config** e pressione a tecla ENTER. O pacote *config* deve ficar no mesmo nível dos pacotes *dao*, *model* e *servlet* (br.com.carstore.config).
 
 Após ter criado o pacote *config*, clique com o botão direito do mouse no pacote **config** e selecione *New / Java Class*.
 
@@ -63,19 +63,21 @@ Defina o nome da classe como "ConnectionPoolConfig" e clique em "OK".
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public class ConnectionPoolConfig {
-    
+
     private static BasicDataSource dataSource;
 
-    public static BasicDataSource getDataSource() {
+    private static BasicDataSource getDataSource() {
 
     }
-    
+
 }
 ```
 
-OBS: Não esqueça de importar (import) a classe BasicDataSource do pacote *org.apache.commons.dbcp2*. Para realizar o importe utilizando o IntelliJ, clique com o botão direito do mouse em cima do nome da classe e utilize o atalho **(ALT + ENTER)** e selecione a opção **import class**.
+Nesse momento o IntelliJ vai sinalizar um erro porque o método ainda não possui um retorno (return). Não se preocupe, isso será resolvido no passo a seguir.
 
-3 - Agora que já temos nossa classe **BasicDataSource** e nosso método **getDataSource()** devidamente criados, vamos iniciar nossa implementacão. A primeira parte consiste em uma validação condicional que verifica se a variável *dataSource* é nula (null).
+OBS: Não esqueça de importar (import) a classe BasicDataSource do pacote *org.apache.commons.dbcp2*. Para realizar o import utilizando o IntelliJ, posicione o cursor em cima do nome da classe e utilize o atalho **(ALT + ENTER)** e selecione a opção **import class**.
+
+3 - Agora que já temos nossa classe **BasicDataSource** e nosso método **getDataSource()** devidamente criados, vamos iniciar nossa implementação. A primeira parte consiste em uma validação condicional que verifica se a variável *dataSource* é nula (null).
 
 O código resultante deverá ser igual ao código a seguir:
 
@@ -88,22 +90,22 @@ import org.apache.commons.dbcp2.BasicDataSource;
 public class ConnectionPoolConfig {
 
     private static BasicDataSource dataSource;
-    
+
     private static BasicDataSource getDataSource() {
 
         if (dataSource == null) {
-            
+
         }
 
         return dataSource;
 
     }
-    
+
 }
 
 ```
 
-Se o resultado dessa validação condicional for verdadeiro, nós iremos criar um novo *dataSource* (será demonstrado na próxima seção). Caso o retorno seja falso, significa que já existe um dataSource criado e portando nós iremos retornar ele, sem executar nenhuma ação adicional. 
+Se o resultado dessa validação condicional for verdadeiro, nós iremos criar um novo *dataSource* (será demonstrado na próxima seção). Caso o retorno seja falso, significa que já existe um dataSource criado e portanto nós iremos retornar ele, sem executar nenhuma ação adicional.
 
 4 - Assumindo que o retorno da validação condicional foi verdadeiro (true), nós precisamos criar um novo dataSource. para isso nós iremos criar uma nova instância de **BasicDataSource** e passar alguns parâmetros sendo eles:
 
@@ -114,9 +116,9 @@ Se o resultado dessa validação condicional for verdadeiro, nós iremos criar u
 * Max Idle
 * Max total
 
-Perceba que alguns desses parâmetros nós já Utilizávamos nas implementações anteriores como (url, username e password). Porém agora estamos adicionando três novos parâmetros sendo eles (Min Idle, Max Idle e Max total).
+Perceba que alguns desses parâmetros nós já utilizávamos nas implementações anteriores como (url, username e password). Porém agora estamos adicionando três novos parâmetros sendo eles (Min Idle, Max Idle e Max total).
 
-Esses parâmetros são necessários para que o nosso pool possa ser configurado e eles podem variar de acordo com as características da sua aplicação. 
+Esses parâmetros são necessários para que o nosso pool possa ser configurado e eles podem variar de acordo com as características da sua aplicação.
 
 A seguir, uma breve descrição sobre o papel desses parâmetros:
 
@@ -242,13 +244,13 @@ Salve todas as alterações **(CTRL + S)**
 
 ## Tarefa 3: Refatorando (refactor) a classe DAO para usar o pool de conexões
 
-1 - Agora que já temos nosso pool de conexões devidamente criado e configurado, chegou a hora de refatorar a classe **CarDAO** para que ela passe a utilizar as conexões fornecidas através do nosso pool de conexões.
+1 - Agora que já temos nosso pool de conexões devidamente criado e configurado, chegou a hora de refatorar a classe **CarDao** para que ela passe a utilizar as conexões fornecidas através do nosso pool de conexões.
 
-Para isso, no IntelliJ IDEA, navegue até o pacote *br.com.carstore.dao* e com dois cliques rápidos (double click) abra a **CarDAO**.
+Para isso, no IntelliJ IDEA, navegue até o pacote *br.com.carstore.dao* e com dois cliques rápidos (double click) abra a **CarDao**.
 
-Com a classe CarDAO aberta podemos iniciar nossa refatoração.
+Com a classe CarDao aberta podemos iniciar nossa refatoração.
 
-2 - A classe CarDAO possui diversos métodos, sendo eles:
+2 - A classe CarDao possui diversos métodos, sendo eles:
 
 * createCar()
 * findAllCars()
@@ -259,40 +261,46 @@ Todos eles abrem uma nova conexão com o banco de dados o que não é uma boa pr
 
 OBS: Isso foi feito propositalmente.
 
-Agora com a implementação do nosso connection pool, nenhum método da DAO irá mais criar conexões, ao invés disso, ele irá pedir uma conexão para o nosso pool que por sua vez irá fazer o reaproveitamento de conexões existesntes que estiverem disponíveis e caso não existe, irá criar uma nova conexão.
+Agora com a implementação do nosso connection pool, nenhum método da DAO irá mais criar conexões, ao invés disso, ele irá pedir uma conexão para o nosso pool que por sua vez irá fazer o reaproveitamento de conexões existentes que estiverem disponíveis e caso não existe, irá criar uma nova conexão.
 
 Dessa forma nós iremos economizar recursos computacionais e como consequência nossa aplicação ficará mais performática.
 
 Dentro de cada método mencionado acima, localize a linha que abre a conexão e faça a substituição:
 
 REMOVA:
-  
+
 ```java
 Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa","sa");
-  
+
 System.out.println("success in database connection");
 ```
-  
-ADICIONE: 
+
+ADICIONE:
 
 ```java
 Connection connection = ConnectionPoolConfig.getConnection();
 ```
 
-Agora, os métodos não irão abrir mais conexões diretamente e portando não escreverá a mensagem ("success in database connection") porque a abertura de novas conexões agora é responsabilidade da nossa classe **BasicDataSource**.
+OBS: Não esqueça de importar a classe **ConnectionPoolConfig** na classe **CarDao** (use o atalho **ALT + ENTER**). O import resultante deverá ser igual ao código a seguir:
+
+```java
+import br.com.carstore.config.ConnectionPoolConfig;
+```
+
+Agora, os métodos não irão abrir mais conexões diretamente e portanto não escreverá a mensagem ("success in database connection") porque a abertura de novas conexões agora é responsabilidade da nossa classe **BasicDataSource**.
 
 Estamos aqui implementando o **S** do [SOLID](https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/).
 
-3 - Faça uma revisão tudo que foi feito até aqui!
+3 - Faça uma revisão de tudo que foi feito até aqui!
 
-4 - Salve todas as alterações **(CTRL + S)** e execute sua aplicação *(tomcat7:run)*. 
+4 - Salve todas as alterações **(CTRL + S)** e execute sua aplicação *(tomcat7:run)*.
 
-Acesse sua aplicação através do link http://localhost:8080 e faça o cadastro de um carro. Repare que o comportamento da aplicação não mudou, porém a mensagem ("New connection pool created with successful") só é escrita uma vez no *stdout*. Esse é o compartamento esperado porque agora a nossa aplicação reaproveita as conexões que já foram abertas e estão disponíveis sempre que possível e tudo isso é gerenciado pelo nosso pool de conexões.
+Acesse sua aplicação através do link http://localhost:8080 e faça o cadastro de um carro. Repare que o comportamento da aplicação não mudou, porém a mensagem ("New connection pool created with successful") só é escrita uma vez no *stdout*. Esse é o comportamento esperado porque agora a nossa aplicação reaproveita as conexões que já foram abertas e estão disponíveis sempre que possível e tudo isso é gerenciado pelo nosso pool de conexões.
 
 ---
 
 Parabéns! :+1:
 
-Você adicionou um pool de conexões na sua aplicação utilizando a biblioteca **Apache Commons DBCP** e agora sua aplicação gerencia as conexões com o banco de dados de forma eficiente. 
+Você adicionou um pool de conexões na sua aplicação utilizando a biblioteca **Apache Commons DBCP** e agora sua aplicação gerencia as conexões com o banco de dados de forma eficiente.
 
-Voltar para [LABORATÓRIO 5](./LABORATORIO-5.md) *ou* ir para [LABORATÓRIO 7](./LABORATORIO-7.md)
+Voltar para [LABORATÓRIO 5]({{< ref "laboratorio-5.md" >}}) *ou* ir para [LABORATÓRIO 7]({{< ref "laboratorio-7.md" >}})
