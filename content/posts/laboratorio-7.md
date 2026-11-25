@@ -26,6 +26,8 @@ Após concluir este laboratório, você deverá ser capaz de:
 
 {{< youtube 4T9q32xqovY >}}
 
+{{< youtube MiZr3YtrVk0 >}}
+
 ## Tarefa 1: Criando a tabela USR (Usuário)
 
 Uma das características do sistema **Car Store** é sua área administrativa que só deve ser acessada por utilizadores autorizados. Para isso ser possível, será necessário a implementação de uma camada de autenticação.

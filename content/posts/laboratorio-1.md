@@ -21,6 +21,8 @@ Após concluir este laboratório, você deverá ser capaz de:
 
 {{< youtube BtDiMAbq53E >}}
 
+{{< youtube Q9G_xCI7fq0 >}}
+
 ## Tarefa 1: Criar uma aplicação Java utilizando o IntelliJ
 
 1 - Garanta que você possui o IntelliJ instalado no seu computador. Caso não tenha faça a instalação da versão *Community Edition*, conforme demonstrado nesse vídeo do youtube: [Instalando o IntelliJ no Windows](https://youtu.be/RBxAySum8UU). Ou clique no link a seguir, para fazer o *download* [link para download do intellij](https://www.jetbrains.com/idea/download/download-thanks.html?platform=macM1&code=IIC)

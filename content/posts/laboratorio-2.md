@@ -21,10 +21,10 @@ Após concluir este laboratório, você deverá ser capaz de:
 ## Esse laboratório também esta disponível em formato de vídeo aula no YouTube
 
 ### PARTE 1
-{{< youtube Q9G_xCI7fq0 >}}
+{{< youtube Du4fwItGElU >}}
 
 ### PARTE 2
-{{< youtube Du4fwItGElU >}}
+{{< youtube Ipuv7SYOxkA >}}
 
 ## Tarefa 1: Adicionar uma nova dependência ao seu projeto
 
